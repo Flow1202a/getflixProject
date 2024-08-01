@@ -10,6 +10,8 @@ services:
       - "8000:80"
     volumes:
       - ./src:/var/www/html
+    depends_on:
+      - db
 
   db:
     image: mysql:8.0
@@ -22,14 +24,17 @@ services:
       MYSQL_PASSWORD: pass
     ports:
       - "3307:3306"
+
   phpma:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
     environment:
       PMA_ARBITRARY: 1
-      PMA_HOST: db
-      PMA_USER: root
-      PMA_PASSWORD: pass
       UPLOAD_LIMIT: 20M
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: test
+      PMA_PASSWORD: pass
+
     ports:
       - 8899:80
