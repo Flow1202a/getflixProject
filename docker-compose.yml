@@ -34,5 +34,6 @@ services:
       PMA_PORT: 3306
       PMA_USER: test
       PMA_PASSWORD: pass
+      MYSQL_ROOT_PASSWORD:
     ports: 
     - 8899:80
