@@ -1,23 +1,28 @@
 <?php
+<<<<<<< HEAD
 
 // Informations de connexion à la base de données
 $servername = "db";
 $username = "test";
 $password = "pass";
 $dbname = "demo";
+=======
+    require 'vendor/autoload.php';
+>>>>>>> origin/flo
 
-try {
-    // Connexion à la base de données MySQL avec PDO
-    $dsn = "mysql:host=$servername;dbname=$dbname;charset=utf8";
-    $pdo = new PDO($dsn, $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    use GuzzleHttp\Client;
 
-    echo "Connecté avec succès à la base de données MySQL<br>";
+    $client = new Client();
+    $response = $client->request('GET', 'https://api.themoviedb.org/3/movie/popular', [
+        'query' => [
+            'api_key' => '35deb6f78ce3b66bbf5aa3b3a40ef939'
+        ]
+    ]);
 
-} catch (PDOException $e) {
-    die("La connexion a échoué : " . $e->getMessage());
-}
+    $body = $response->getBody();
+    $data = json_decode($body, true);
 
+<<<<<<< HEAD
 // Token d'authentification pour TheTVDB
 $tvdbToken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOiIiLCJhcGlrZXkiOiJhYjNmYWY2MS02YjI4LTRmNGItOGM1Mi0wOWE4ZWVjYzhkMDciLCJjb21tdW5pdHlfc3VwcG9ydGVkIjpmYWxzZSwiZXhwIjoxNzI1MDU5NTkzLCJnZW5kZXIiOiIiLCJoaXRzX3Blcl9kYXkiOjEwMDAwMDAwMCwiaGl0c19wZXJfbW9udGgiOjEwMDAwMDAwMCwiaWQiOiIyNDcxNzkwIiwiaXNfbW9kIjpmYWxzZSwiaXNfc3lzdGVtX2tleSI6ZmFsc2UsImlzX3RydXN0ZWQiOmZhbHNlLCJwaW4iOm51bGwsInJvbGVzIjpbXSwidGVuYW50IjoidHZkYiIsInV1aWQiOiIifQ.JiX9WS7RzmlRbiu9QVLsD1EAymeMs3pEKV5bt8fNjFhQsO3SlM-P1SsenKG3NS2DMBx5AnaODexmcnX7rkKfverM3QrF6QJSBvVkk1gHccb25fMgSWrEZ3JiZqQSD_oy_4qgnZkk0nlpSRy40QzG1Ik78xe3v-Sqjv-RbVGNJr_es2d7vUDzQ6FVzoFM-qqTgpqwn4tsg1hyJiev6EZpk5OYHY-lhrvjReuEuYANtjxJL3SEMpnIgywHSUHaBsJMzkBw7BGQUZs330nENHJZhf9G61hKlKuguDaA2Dmf0gyPjSR1WFW3oqJhEGW4Ku1frdnjN6W5cxwWId3u1W8o2ldO_Pd6tw9UWapuUpMxQ8brqAVFSoGwLv10AmzTKc2C3M3cHmJ2-Q_DRqRVu_vu73O6AtdkDhqzjy_8PjV9ppBuQXwpruO9Or5opOjR3uXOSQKVonH4WOikrUY1NMDAcuevuT4WgHtu6umJ3du_D8pdTMQML4SagaEx_5IJ42Z3qq1dNPvmNRd2ZsEB_Mfnqj9P-RxHc7oi0ORkasdSLjk1S-PYg5X_USJ9r8eHFeKhMqBeas4-Ah6Br7f-hSCNvK46Ldre31NVuWrjbmmFDdYehryxDs-tMy8ATH9DamWDshdBCxuqT07SCMGSDjoJqbh42jeYunyjviq-ha7EvWo';  // Remplacez cette valeur par le token obtenu précédemment
 
@@ -142,3 +147,8 @@ foreach ($films as $item) {
 $conn->close();
 
 
+=======
+    foreach ($data['results'] as $movie) {
+        echo $movie['title'] . '<br>';
+    }
+>>>>>>> origin/flo
