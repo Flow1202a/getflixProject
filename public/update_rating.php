@@ -1,4 +1,5 @@
 <?php
+global $pdo;
 require_once '../includes/db_connect.php'; // Assurez-vous que le chemin est correct
 
 $api_key = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MzYwOTQzZDU1NGZlNTg3N2Y2YjcwZDZkMDNiYjZhYSIsIm5iZiI6MTcyMjYwNjc2OS45NTU2MDMsInN1YiI6IjY2YWNlM2U5OWQ1OTFhZDA0MGQyZTc5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kGdnLpXJprFaL4OKUApmNyqsV8LiF42IGeU-yPAjvqE';
@@ -41,4 +42,3 @@ foreach ($movies as $movie) {
         echo "Aucun rating trouvé pour l'ID du film : {$movie_id}\n";
     }
 }
-?>

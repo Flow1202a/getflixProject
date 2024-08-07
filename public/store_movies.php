@@ -1,4 +1,5 @@
 <?php
+global $pdo;
 require_once '../includes/db_connect.php';
 require_once '../includes/api_fetch.php';
 
@@ -30,4 +31,3 @@ if ($data && is_array($data) && isset($data['results'])) {
 } else {
     echo "Erreur lors de la récupération des données de l'API.";
 }
-?>
