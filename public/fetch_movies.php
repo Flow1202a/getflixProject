@@ -1,4 +1,5 @@
 <?php
+global $pdo;
 require_once '../includes/db_connect.php';
 
 header('Content-Type: application/json');
@@ -28,4 +29,3 @@ try {
     http_response_code(500);
     echo json_encode(['error' => $e->getMessage()]);
 }
-?>

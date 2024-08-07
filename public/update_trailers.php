@@ -1,4 +1,5 @@
 <?php
+global $pdo;
 require_once '../includes/db_connect.php'; // Assurez-vous que le chemin est correct
 
 // Remplacez cette clé par votre propre clé API valide
@@ -62,4 +63,3 @@ try {
 } catch (PDOException $e) {
     echo 'Erreur de connexion : ' . $e->getMessage();
 }
-?>
