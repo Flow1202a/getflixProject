@@ -54,3 +54,54 @@ echo $movie['overview'];
         }
     </style>
 </div>
+
+<div class="rating">
+    <?php echo $movie['rating'] . '/10'; ?>
+</div>
+
+<div class="actor_name">
+    <?php echo $movie['artist_name']; ?>
+</div>
+
+<div class="actor_image">
+<?php
+// Base URL pour les images
+$base_image_url = "https://image.tmdb.org/t/p/w500/";
+
+// Récupération de l'identifiant du film depuis l'URL ou autre source
+if (isset($_GET['id'])) {
+    $movie_id = (int)$_GET['id']; // Convertit l'id en entier pour plus de sécurité
+} else {
+    die("L'identifiant du film est requis.");
+}
+
+// Préparer et exécuter la requête pour récupérer la colonne 'artist_image_url'
+try {
+    $stmt = $pdo->prepare("SELECT artist_image_url FROM movies WHERE id = :id");
+    $stmt->execute(['id' => $movie_id]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Vérifiez si la colonne 'artist_image_url' est récupérée
+    if ($row && isset($row['artist_image_url'])) {
+        $artist_image_url = $row['artist_image_url'];
+
+        // Séparer les chemins d'image en un tableau
+        $image_paths = explode(', ', $artist_image_url);
+
+        // Construit les URLs complètes pour chaque image
+        $image_urls = array_map(function($path) use ($base_image_url) {
+            return $base_image_url . ltrim($path, '/'); // ltrim() pour enlever le slash initial
+        }, $image_paths);
+
+        // Affiche les URLs des images
+        foreach ($image_urls as $url) {
+            echo "<img src=\"$url\" alt=\"Artist Image\"><br>";
+        }
+    } else {
+        echo "Aucune image trouvée.";
+    }
+} catch (PDOException $e) {
+    die("Query failed: " . $e->getMessage());
+}
+?>
+</div>

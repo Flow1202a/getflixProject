@@ -48,15 +48,19 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <article class="container mb-5 mt-5">
     <div class="row flex-wrap d-flex justify-content-between align-content-center">
-        <?php foreach ($movies as $movie): ?>
-            <div class="card col-sm-1 col-md-2 col-lg-2 mb-5 me-1" style="">
-                <img src="<?php echo htmlspecialchars($base_image_url . htmlspecialchars($movie['movies_image'])); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($movie['title']); ?>">
-                <div class="card-body">
-                    <h5 class="card-title"><?php echo htmlspecialchars($movie['title']); ?></h5>
-                    <a href="movie.php?id=<?php echo htmlspecialchars($movie['id']); ?>" class="btn btn-primary">Voir les détails</a>
-                </div>
-            </div>
-        <?php endforeach; ?>
+
+            <?php for ($i = 0; $i < 25; $i++): ?>
+                <?php if (isset($movies[$i])): ?>
+                    <?php $movie = $movies[$i]; ?>
+                    <div class="card moviecarte col-xs-12 col-sm-6 col-md-3 col-lg-2 mb-5 me-1">
+                        <img src="<?php echo htmlspecialchars($base_image_url . htmlspecialchars($movie['movies_image'])); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($movie['title']); ?>">
+                        <div class="card-body align-content-center">
+                            <h5 class="card-title" style="color: #EED6D3"><?php echo htmlspecialchars($movie['title']); ?></h5>
+                            <a href="movie.php?id=<?php echo htmlspecialchars($movie['id']); ?>" class="btn boutonDetails btn-primary">Voir les détails</a>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            <?php endfor; ?>
     </div>
 </article>
 
