@@ -2,7 +2,7 @@
 global $pdo;
 require_once '../includes/db_connect.php'; // Assurez-vous que le chemin est correct
 
-$api_key = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MzYwOTQzZDU1NGZlNTg3N2Y2YjcwZDZkMDNiYjZhYSIsIm5iZiI6MTcyMjYwNjc2OS45NTU2MDMsInN1YiI6IjY2YWNlM2U5OWQ1OTFhZDA0MGQyZTc5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kGdnLpXJprFaL4OKUApmNyqsV8LiF42IGeU-yPAjvqE';
+$api_key = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzODVlMjM2MjVlN2IxNzA4Y2U2YzQxZjY5YWEwMTQyOSIsIm5iZiI6MTcyMzAzODYwNi40MzA5MjksInN1YiI6IjY2YjM3YWY0MzIzZDY3ZjhkMDkyZTNhMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gDi0Los2cvzfAdxLkIA_vPly75nnvchTZKnPDlM7H68';
 
 // Requête pour obtenir les films
 $query = "SELECT id FROM movies";
