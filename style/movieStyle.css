@@ -79,7 +79,12 @@ iframe.trailer {
     color: #555;
     text-align: center; /* Centrage du classement */
 }
-
+.rel_date{
+    text-align: center;
+}
+.movie_genres{
+    text-align: center;
+}
 /* Style pour le nom de l'acteur */
 .actor_name {
     font-size: 1.2em;

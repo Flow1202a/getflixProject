@@ -107,16 +107,16 @@ $base_trailer = 'https://www.youtube.com/embed/';
     </div>
 
     
-    <div class="rel_date">
+    <div class="rel_date reveal">
     <p><strong>Date de sortie:</strong> <?php echo htmlspecialchars($movie['release_date']); ?></p>
     </div>
 
-    <div class="movie-genres">
+    <div class="movie_genres reveal">
     <strong>Genres:</strong> <?php echo htmlspecialchars($movie['movies_genres']); ?>
     </div>
 
     <div class="rating reveal">
-        <?php echo htmlspecialchars($movie['rating']) . '/10'; ?>
+       </br><p> Note :</p> <?php echo htmlspecialchars($movie['rating']) . '/10'; ?>
     </div>
 
     <div class="actor_name reveal">
