@@ -89,3 +89,6 @@ $release_date = escapeHtml($movie['release_date']); // Ajout de la date de sorti
 </div>
 
 <p>Date de sortie : <?php echo $release_date; ?></p>
+<div class="movie-genres">
+    <strong>Genres:</strong> <?php echo htmlspecialchars($movie['movies_genres']); ?>
+</div>
