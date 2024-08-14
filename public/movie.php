@@ -1,94 +1,216 @@
 <?php
+global $pdo;
 require_once('../includes/db_connect.php');
 
-// Fonction pour échapper les données de sortie
-function escapeHtml($data) {
-    return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
-}
-
-// Récupération de l'identifiant du film depuis l'URL
-$idMovie = isset($_GET['id']) ? (int)$_GET['id'] : null;
-
-if (!$idMovie) {
+// Vérifier si l'identifiant du film est présent dans l'URL
+if (isset($_GET['id'])) {
+    $idMovie = $_GET['id'];
+} else {
     die("L'identifiant du film est requis.");
 }
 
-// URL de base pour les images et les bandes-annonces
-$base_image_url = 'https://image.tmdb.org/t/p/w500/';
-$base_trailer = 'https://www.youtube.com/embed/';
-
-// Préparation et exécution de la requête SQL
-$sql = "SELECT * FROM movies WHERE id = :idMovie";
+// Préparer et exécuter la requête SQL de manière sécurisée
+$sql = "SELECT * FROM movies WHERE movies.id = :idMovie";
 $stmt = $pdo->prepare($sql);
-$stmt->bindParam(':idMovie', $idMovie, PDO::PARAM_INT);
+$stmt->bindParam(':idMovie', $idMovie, PDO::PARAM_STR);
 $stmt->execute();
 $movie = $stmt->fetch(PDO::FETCH_ASSOC);
 
+// Vérifier si le film existe
 if (!$movie) {
     die('Le film n\'existe pas.');
 }
 
-// Extraction des données du film et échappement
-$title = escapeHtml($movie['title']);
-$overview = escapeHtml($movie['overview']);
-$movie_image = escapeHtml($base_image_url . $movie['movies_image']);
-$trailer_url = escapeHtml($base_trailer . $movie['movies_trailer']);
-$rating = escapeHtml($movie['rating']);
-$artist_name = escapeHtml($movie['artist_name']);
-$artist_image_url = $movie['artist_image_url'];
-$release_date = escapeHtml($movie['release_date']); // Ajout de la date de sortie
-
+// URL de base pour les images et les bandes-annonces
+$base_image_url = 'https://image.tmdb.org/t/p/w500';
+$base_trailer = 'https://www.youtube.com/embed/';
 ?>
 
-<h1><?php echo $title; ?></h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo htmlspecialchars($movie['title']); ?></title>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link rel="stylesheet" href="../style/movieStyle.css">
+    <link rel="stylesheet" href="../style/style.css">
 
-<div class="overview">
-    <?php echo $overview; ?>
-</div>
+</head>
+<body>
 
-<div class="movieImage">
-    <img src="<?php echo $movie_image; ?>" alt="Image du film">
-</div>
+<header>
+    <nav class="nav position-absolute">
+        <i class="uil uil-bars navOpenBtn"></i>
+        <a href="#" class="logo">GetFlixDeNullos</a>
 
-<div>
-    <iframe class="trailer" width="420" height="315" src="<?php echo $trailer_url; ?>" frameborder="0" allowfullscreen></iframe>
-    <style>
-        .trailer {
-            position: relative;
-        }
-    </style>
-</div>
+        <ul class="nav-links align-items-center">
+            <i class="uil uil-times navCloseBtn"></i>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">WatchList</a></li>
+            <li><a href="#">Account</a></li>
+            <li><a href="#">Connexion</a></li>
+        </ul>
 
-<div class="rating">
-    <?php echo $rating . '/10'; ?>
-</div>
+        <i class="uil uil-search search-icon" id="searchIcon"></i>
+        <div class="search-box">
+            <i class="uil uil-search search-icon"></i>
+            <input type="text" placeholder="Search here..." />
+        </div>
+    </nav>
+</header>
 
-<div class="actor_name">
-    <?php echo $artist_name; ?>
-</div>
-
-<div class="actor_image">
+<div class="container">
     <?php
-    if ($artist_image_url) {
-        // Séparer les chemins d'image en un tableau
-        $image_paths = explode(', ', $artist_image_url);
+    global $pdo;
+    require_once('../includes/db_connect.php');
 
-        // Construit les URLs complètes pour chaque image
-        $image_urls = array_map(function($path) use ($base_image_url) {
-            return $base_image_url . ltrim($path, '/'); // ltrim() pour enlever le slash initial
-        }, $image_paths);
+    $idMovie = $_GET['id'] ?? null;
 
-        // Affiche les URLs des images
-        foreach ($image_urls as $url) {
-            echo "<img src=\"$url\" alt=\"Image de l'artiste\"><br>";
-        }
-    } else {
-        echo "Aucune image trouvée.";
+    if (!$idMovie) {
+        die('L\'identifiant du film est requis.');
+    }
+
+    // URL de la base pour les images
+    $base_image_url = 'https://image.tmdb.org/t/p/w500';
+    $base_trailer = 'https://www.youtube.com/embed/';
+
+    // Préparer une requête SQL sécurisée
+    $sql = "SELECT * FROM movies WHERE movies.id = :idMovie";
+    $stmt = $pdo->prepare($sql);
+
+    // Liaison des paramètres pour éviter les injections SQL
+    $stmt->bindParam(':idMovie', $idMovie, PDO::PARAM_STR);
+
+    // Exécution de la requête préparée
+    $stmt->execute();
+    $movie = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$movie) {
+        die('Le film n\'existe pas.');
     }
     ?>
+
+    <h1 class="reveal"><?php echo htmlspecialchars($movie['title']); ?></h1>
+
+    <div class="overview reveal">
+        <?php echo htmlspecialchars($movie['overview']); ?>
+    </div>
+
+    <div class="movieImage">
+        <img class="reveal" data-src="<?php echo htmlspecialchars($base_image_url . $movie['movies_image']); ?>" alt="photo du film">
+    </div>
+
+    <div>
+        <iframe class="trailer reveal" width="500" height="315" src="<?php echo htmlspecialchars($base_trailer . $movie['movies_trailer']); ?>"></iframe>
+    </div>
+
+    
+    <div class="rel_date">
+    <p><strong>Date de sortie:</strong> <?php echo htmlspecialchars($movie['release_date']); ?></p>
+    </div>
+
+    <div class="movie-genres">
+    <strong>Genres:</strong> <?php echo htmlspecialchars($movie['movies_genres']); ?>
+    </div>
+
+    <div class="rating reveal">
+        <?php echo htmlspecialchars($movie['rating']) . '/10'; ?>
+    </div>
+
+    <div class="actor_name reveal">
+        <?php echo htmlspecialchars($movie['artist_name']); ?>
+    </div>
+
+    <div class="actor_image reveal">
+        <?php
+        // Base URL pour les images des acteurs
+        $base_image_url = "https://image.tmdb.org/t/p/w500/";
+
+        try {
+            $stmt = $pdo->prepare("SELECT artist_image_url FROM movies WHERE id = :id");
+            $stmt->execute(['id' => $idMovie]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($row && !empty($row['artist_image_url'])) {
+                $artist_image_url = $row['artist_image_url'];
+                $image_paths = explode(', ', $artist_image_url);
+                foreach ($image_paths as $path) {
+                    $full_image_url = $base_image_url . ltrim($path, '/');
+                    echo '<img data-src="' . htmlspecialchars($full_image_url) . '" alt="Artist Image"><br>';
+                }
+            } else {
+                echo "Aucune image trouvée.";
+            }
+        } catch (PDOException $e) {
+            die("Échec de la requête : " . $e->getMessage());
+        }
+        ?>
+    </div>
 </div>
 
-<p>Date de sortie : <?php echo $release_date; ?></p>
-<div class="movie-genres">
-    <strong>Genres:</strong> <?php echo htmlspecialchars($movie['movies_genres']); ?>
-</div>
+<section class="footer">
+    <div class="footer-row">
+        <div class="footer-col">
+            <h4>Info</h4>
+            <ul class="links">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Compressions</a></li>
+                <li><a href="#">Customers</a></li>
+                <li><a href="#">Service</a></li>
+                <li><a href="#">Collection</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Explore</h4>
+            <ul class="links">
+                <li><a href="#">Free Designs</a></li>
+                <li><a href="#">Latest Designs</a></li>
+                <li><a href="#">Themes</a></li>
+                <li><a href="#">Popular Designs</a></li>
+                <li><a href="#">Art Skills</a></li>
+                <li><a href="#">New Uploads</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Legal</h4>
+            <ul class="links">
+                <li><a href="#">Customer Agreement</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">GDPR</a></li>
+                <li><a href="#">Security</a></li>
+                <li><a href="#">Testimonials</a></li>
+                <li><a href="#">Media Kit</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Newsletter</h4>
+            <p>
+                Subscribe to our newsletter for a weekly dose
+                of news, updates, helpful tips, and
+                exclusive offers.
+            </p>
+            <form action="#">
+                <input type="text" placeholder="Your email" required>
+                <button type="submit">SUBSCRIBE</button>
+            </form>
+            <div class="icons">
+                <i class="fa-brands fa-facebook-f"></i>
+                <i class="fa-brands fa-twitter"></i>
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<button id="backToTop" title="Retour en haut">⬆️</button>
+
+<script src="../javascript/scriptMovie.js"></script>
+
+</body>
+</html>
