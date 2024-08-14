@@ -32,7 +32,7 @@ require_once('../includes/db_connect.php');
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['role'] = $user['role'];
 
-                header("Location: admin.php");
+                header("Location: ../includes/back_office.php");
                 exit;  // Prevent further script execution
             } else {
                 // Login failed - avoid specific error messages for security
