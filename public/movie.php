@@ -106,6 +106,15 @@ $base_trailer = 'https://www.youtube.com/embed/';
         <iframe class="trailer reveal" width="500" height="315" src="<?php echo htmlspecialchars($base_trailer . $movie['movies_trailer']); ?>"></iframe>
     </div>
 
+    
+    <div class="rel_date">
+    <p><strong>Date de sortie:</strong> <?php echo htmlspecialchars($movie['release_date']); ?></p>
+    </div>
+
+    <div class="movie-genres">
+    <strong>Genres:</strong> <?php echo htmlspecialchars($movie['movies_genres']); ?>
+    </div>
+
     <div class="rating reveal">
         <?php echo htmlspecialchars($movie['rating']) . '/10'; ?>
     </div>
