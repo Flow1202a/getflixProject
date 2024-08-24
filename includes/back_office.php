@@ -1,107 +1,128 @@
 <?php
-global $pdo;
+global $pdo, $query;
 session_start();
-    require_once('db_connect.php');
 
-    // Vérifier si l'utilisateur est connecté
-    if (!isset($_SESSION['role'])) {
-        die("Accès refusé");
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
+    die("Accès refusé : Vous n'êtes pas connecté.");
+}
+
+require_once('../includes/db_connect.php');
+
+// Supprimer un message
+if (isset($_GET['delete'])) {
+    $message_id = $_GET['delete'];
+    $user_id = $_SESSION['user_id'];
+    $role = $_SESSION['role'];
+
+    if ($role == 'admin') {
+        // L'administrateur peut supprimer n'importe quel message
+        $query = "DELETE FROM messages WHERE id = :id";
+        $params = [':id' => $message_id];
+    } else {
+        // Un utilisateur normal ne peut supprimer que ses propres messages
+        $query = "DELETE FROM messages WHERE id = :id AND user_id = :user_id";
+        $params = [
+            ':id' => $message_id,
+            ':user_id' => $user_id
+        ];
     }
 
-    // Supprimer un message
-    if (isset($_GET['delete'])) {
-        $message_id = $_GET['delete'];
-        $user_id = $_SESSION['users_id'];
-        $role = $_SESSION['role'];
+    try {
+        $stmt = $pdo->prepare($query);
+        $stmt->execute($params);
 
-        // Si l'utilisateur est un admin, il peut supprimer n'importe quel message
-        if ($role == 1) {
-            $query = "DELETE FROM messages WHERE id = :id";
-            $params = [':id' => $message_id];
+        if ($stmt->rowCount() > 0) {
+            echo "Message supprimé avec succès.";
         } else {
-            // Si l'utilisateur est un utilisateur normal, il ne peut supprimer que ses propres messages
-            $query = "DELETE FROM messages WHERE id = :id AND user_id = :users_id";
-            $params = [
-                ':id' => $message_id,
-                ':users_id' => $user_id
-            ];
+            echo "Erreur : Le message n'a pas pu être supprimé (soit il n'existe pas, soit vous n'avez pas les droits).";
         }
-
-        try {
-            $stmt = $pdo->prepare($query);
-            $stmt->execute($params);
-            header("Location: back_office.php");
-            exit();
-        } catch (PDOException $e) {
-            echo "Erreur : " . $e->getMessage();
-        }
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
     }
+}
+
+// Récupérer les messages pour les afficher
+try {
+    if ($_SESSION['role'] == 'admin') {
+        // Si l'utilisateur est un admin, il peut voir tous les messages
+        $query = "SELECT messages.id, users.username, messages.content, messages.created_at 
+                  FROM messages 
+                  JOIN users ON messages.user_id = users.id";
+    } else {
+        // Sinon, il ne peut voir que ses propres messages
+        $query = "SELECT messages.id, users.username, messages.content, messages.created_at 
+                  FROM messages 
+                  JOIN users ON messages.user_id = users.id 
+                  WHERE user_id = :user_id";
+    }
+
+    $stmt = $pdo->prepare($query);
+
+    if ($_SESSION['role'] != 'admin') {
+        $stmt->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+    }
+
+    $stmt->execute();
+    $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+}
+
 ?>
+
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Gestion des Messages</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-            }
-            table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-            th, td {
-                padding: 10px;
-                border: 1px solid #ddd;
-            }
-            th {
-                background-color: #f4f4f4;
-            }
-            .delete-btn {
-                color: red;
-                cursor: pointer;
-            }
-            .delete-btn:hover {
-                text-decoration: underline;
-            }
-        </style>
-    </head>
-    <body>
-    <header>
-        <h1>Gestion des Messages</h1>
-    </header>
-        <table>
-            <thead>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des Messages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+<h1>Gestion des Messages</h1>
+<p><a href="../public/index.php">Retour à l'accueil</a></p>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Utilisateur</th>
+        <th>Message</th>
+        <th>Date de Création</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php if (!empty($messages)): ?>
+        <?php foreach ($messages as $message): ?>
             <tr>
-                <th>Date</th>
-                <th>Nom d'utilisateur</th>
-                <th>Email</th>
-                <th>Message</th>
-                <th>Supprimer</th>
+                <td><?php echo htmlspecialchars($message['id']); ?></td>
+                <td><?php echo htmlspecialchars($message['username']); ?></td>
+                <td><?php echo htmlspecialchars($message['content']); ?></td>
+                <td><?php echo htmlspecialchars($message['created_at']); ?></td>
+                <td><a href="back_office.php?delete=<?php echo $message['id']; ?>">Supprimer</a></td>
             </tr>
-            </thead>
-            <tbody>
-                <?php
-                    try {
-                        // Requête pour récupérer les messages avec les informations de l'utilisateur
-                        $stmt = $pdo->query("SELECT messages.id, messages.created_at, users.username, users.email, messages.content 
-                                                     FROM messages 
-                                                     JOIN users ON messages.user_id = users.id");
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            echo "<tr>";
-                            echo "<td>{$row['created_at']}</td>";
-                            echo "<td>{$row['username']}</td>";
-                            echo "<td>{$row['email']}</td>";
-                            echo "<td>{$row['content']}</td>";
-                            // Le lien de suppression est toujours affiché, mais la suppression ne fonctionnera que si l'utilisateur est autorisé
-                            echo "<td><a class='delete-btn' href='back_office.php?delete={$row['id']}'>X</a></td>";
-                            echo "</tr>";
-                        }
-                    } catch (PDOException $e) {
-                    echo "Erreur : " . $e->getMessage();
-                }
-                ?>
-            </tbody>
-        </table>
-    </body>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <tr>
+            <td colspan="5">Aucun message trouvé.</td>
+        </tr>
+    <?php endif; ?>
+    </tbody>
+</table>
+</body>
 </html>

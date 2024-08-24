@@ -1,9 +1,19 @@
-
+/*index style*/
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
 body{
   background-color: #A49393 !important;
-  font-family: "Poppins Medium", serif !important;
+  font-family: "Poppins Medium", serif ;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Assurez-vous que le z-index est suffisamment élevé */
+  background-color: #E8B4B8;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 /*navbar*/
 * {
@@ -66,7 +76,6 @@ a {
 .nav .search-box {
   position: absolute;
   right: 250px;
-  height: 45px;
   max-width: 555px;
   width: 100%;
   opacity: 0;
@@ -84,13 +93,13 @@ a {
   color: #000000;
   transform: translateY(-50%);
 }
-.search-box input {
+.searchTarget {
   height: 100%;
   width: 100%;
   border: none;
   outline: none;
   border-radius: 6px;
-  background-color: #000000;
+  background-color: #ffffff;
   padding: 0 15px 0 45px;
 }
 
@@ -198,11 +207,7 @@ article{
 
 /*footer*/
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+
 
 .footer {
   position: absolute;
@@ -329,4 +334,14 @@ article{
   }
 }
 
+/* Effets de révélation pour les éléments */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
 
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}

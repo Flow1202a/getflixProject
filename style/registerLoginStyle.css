@@ -198,6 +198,38 @@ body {
     text-decoration: underline;
 }
 
+ .error-message {
+     color: #38acce;
+     background-color: #013d50;
+     padding: 10px;
+     margin-bottom: 15px;
+     border: 1px solid #ff0000;
+     border-radius: 5px;
+     text-align: center;
+ }
+
+ .success-message {
+     color: #4caf50;
+     background-color: #e8f5e9;
+     padding: 10px;
+     margin-bottom: 15px;
+     border: 1px solid #4caf50;
+     border-radius: 5px;
+     text-align: center;
+ }
+
+.error-message {
+    color: #ff4c4c;
+    background-color: #ffe6e6;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ff0000;
+    border-radius: 5px;
+    text-align: center;
+}
+
+
+
 /*Media queries */
 
 @media all and (min-width: 481px) and (max-width: 568px) {

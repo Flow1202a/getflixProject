@@ -17,7 +17,6 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../style/style.css">
-    <script src="../javascript/script.js" defer></script>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Welcome</title>
@@ -41,18 +40,24 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <i class="uil uil-search search-icon" id="searchIcon"></i>
         <div class="search-box">
             <i class="uil uil-search search-icon"></i>
-            <input type="text" placeholder="Search here..." />
+            <!-- Formulaire de recherche -->
+            <form action="search_results.php" method="get">
+                <input class="searchTarget"type="text" name="q" placeholder="Rechercher un film, un artiste, ou un genre..." />
+                <!-- Le bouton est nécessaire pour les soumissions par "Entrer", mais reste invisible -->
+                <button type="submit" style="display: none;"></button>
+            </form>
         </div>
     </nav>
 </header>
 
+
 <article class="container mb-5 mt-5">
     <div class="row flex-wrap d-flex justify-content-between align-content-center">
 
-            <?php for ($i = 0; $i < 25; $i++): ?>
+            <?php for ($i = 0; $i < 100; $i++): ?>
                 <?php if (isset($movies[$i])): ?>
                     <?php $movie = $movies[$i]; ?>
-                    <div class="card moviecarte col-xs-12 col-sm-6 col-md-3 col-lg-2 mb-5 me-1">
+                    <div class="card moviecarte col-xs-12 col-sm-6 col-md-3 col-lg-2 mb-5 me-1 reveal">
                         <img src="<?php echo htmlspecialchars($base_image_url . htmlspecialchars($movie['movies_image'])); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($movie['title']); ?>">
                         <div class="card-body align-content-center">
                             <h5 class="card-title" style="color: #EED6D3"><?php echo htmlspecialchars($movie['title']); ?></h5>
@@ -121,6 +126,7 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 </section>
-
+<script src="../javascript/script.js" defer></script>
+<script src="../javascript/scriptMovie.js"></script>
 </body>
 </html>
