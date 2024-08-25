@@ -4,6 +4,14 @@ session_start();
 require_once('../includes/db_connect.php');
 $base_image_url = 'https://image.tmdb.org/t/p/w500';
 
+<<<<<<< HEAD
+=======
+//Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['role'])) {
+    die("Accès refusé");
+}
+
+>>>>>>> cffee3845227eaa4d4e51ff9619a0a1c2273411f
 // Liste des genres autorisés
 $allowed_genres = [
     'drama',
