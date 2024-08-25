@@ -14,7 +14,7 @@ body {
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
-    background: #fff;
+    background: #bbd6e3;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -25,6 +25,10 @@ h1 {
     color: #333;
     margin-bottom: 20px;
     text-align: center; /* Centrage du titre */
+}
+.overview {
+    text-align: center;
+
 }
 
 /* Styles pour les sections de texte */
@@ -137,7 +141,7 @@ iframe.trailer {
 
 body {
     background-color: #A49393 !important;
-    font-family: "Poppins Medium", serif !important;
+    font-family: "Poppins", serif !important;
     padding-top: 70px; /* Ajustez cette valeur pour correspondre à la hauteur de votre barre de navigation fixe */
     margin: 0; /* Ajouté pour éviter les marges par défaut */
 }
