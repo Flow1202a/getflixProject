@@ -1,6 +1,6 @@
 <?php
 
-global $pdo;
+global $pdo, $error_message;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -34,7 +34,6 @@ function sendSecurityCode($email, $security_code): void
 
         // Envoi de l'e-mail
         $mail->send();
-        echo 'Le message a été envoyé';
     } catch (Exception $e) {
         // En cas d'erreur, afficher un message d'erreur
         echo "Le message n'a pas pu être envoyé. Erreur de Mailer : {$mail->ErrorInfo}";
@@ -99,81 +98,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         } else {
             // Si les informations de connexion sont incorrectes, afficher un message d'erreur
-            echo "Invalid login credentials.";
+            $error_message = "Identifiants de connexion incorrects.";
         }
     } catch (PDOException $e) {
         // En cas d'erreur SQL, enregistrer l'erreur dans un fichier log
         error_log($e->getMessage(), 3, "../logs/error.log");
-        echo "Une erreur est survenue. Veuillez réessayer plus tard.";
+        $error_message = "Une erreur est survenue. Veuillez réessayer plus tard.";
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <title>Formulaire de Connexion</title>
     <link rel="stylesheet" href="../style/registerLoginStyle.css">
-    <link rel="stylesheet" href="../style/style.css">
-
 </head>
 <body>
-<header>
-    <nav class="nav position-absolute">
-        <i class="uil uil-bars navOpenBtn"></i>
-        <a href="#" class="logo">GetFlixDeNullos</a>
-
-        <ul class="nav-links align-items-center">
-            <i class="uil uil-times navCloseBtn"></i>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="#">Categories</a></li>
-            <li><a href="#">WatchList</a></li>
-            <li><a href="../includes/back_office.php">Account</a></li>
-            <li><a href="logintest.php">Connexion</a></li>
-        </ul>
-
-        <i class="uil uil-search search-icon" id="searchIcon"></i>
-        <div class="search-box">
-            <i class="uil uil-search search-icon"></i>
-            <input type="text" placeholder="Search here..." />
-        </div>
-    </nav>
-</header>
-
 <div class="wrapper">
-    <header>Sign In</header>
+    <header>Connexion</header>
     <form method="post">
-        <?php if ($error_message): ?>
+        <?php if (isset($error_message) && $error_message): ?>
             <div class="error-message">
                 <?php echo $error_message; ?>
             </div>
         <?php endif; ?>
 
         <div class="input-box">
-            <input type="text" placeholder="Username" name="username" required>
-            <box-icon type='solid' name='user' color="white"></box-icon>
+            <input type="text" placeholder="Nom d'utilisateur ou E-mail" name="username" required>
         </div>
         <div class="input-box">
-            <input type="password" placeholder="Password" name="password" required>
-            <box-icon name='lock-alt' type='solid' color="white"></box-icon>
+            <input type="password" placeholder="Mot de passe" name="password" required>
         </div>
 
         <div class="remember-forget">
-            <a href="#">Forgot password?</a>
+            <a href="../public/forgot_password.php">Mot de passe oublié ?</a>
         </div>
-        <button type="submit" class="btn">Login</button>
+        <button type="submit" class="btn">Connexion</button>
 
         <div class="register-link">
-            <p>Don't have an account?<br> <a href="../public/register.php">Sign Up</a></p>
+            <p>Pas de compte ? <a href="../public/register.php">Inscrivez-vous</a></p>
         </div>
     </form>
 </div>
-
-
-
-<script src="../javascript/scriptMovie.js"></script>
 </body>
 </html>
