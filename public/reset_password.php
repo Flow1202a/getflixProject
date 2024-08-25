@@ -1,31 +1,33 @@
 <?php
 global $pdo;
-require '../includes/PHPMailer/src/Exception.php';
-require '../includes/PHPMailer/src/PHPMailer.php';
-require '../includes/PHPMailer/src/SMTP.php';
+session_start(); // Assurez-vous que la session est démarrée
+
 require '../includes/db_connect.php'; // Inclusion du fichier de connexion PDO
 
-function hashSecurityAnswer($answer): string
-{
-    return password_hash($answer, PASSWORD_BCRYPT);
-}
+// Vérifiez si le script est exécuté via une requête HTTP POST
+if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Récupérer l'ID utilisateur depuis la session
+    $user_id = $_SESSION['user_id'] ?? null;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user_id = $_POST['user_id'];
-    $new_security_answer = $_POST['security_answer'];
+    // Récupérer le nouveau mot de passe du formulaire
+    $new_password = $_POST['new_password'] ?? null;
 
-    // Hachage de la réponse à la question de sécurité
-    $hashed_answer = hashSecurityAnswer($new_security_answer);
+    if ($user_id && $new_password) {
+        // Hachage du nouveau mot de passe
+        $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
 
-    // Mise à jour de la réponse dans la base de données en utilisant PDO
-    $stmt = $pdo->prepare("UPDATE user_conf SET security_answer = :security_answer WHERE user_id = :user_id");
-    $stmt->execute(['security_answer' => $hashed_answer, 'user_id' => $user_id]);
+        // Mise à jour du mot de passe dans la base de données
+        $stmt = $pdo->prepare("UPDATE user_conf SET password = :password WHERE user_id = :user_id");
+        $stmt->execute(['password' => $hashed_password, 'user_id' => $user_id]);
 
-    echo "La réponse à la question de sécurité a été mise à jour et hachée avec succès.";
+        echo "Votre mot de passe a été réinitialisé avec succès.";
+    } else {
+        echo "Erreur : ID utilisateur ou nouveau mot de passe manquant.";
+    }
+} else {
+    echo "Cette page doit être accédée via une requête POST.";
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="fr">

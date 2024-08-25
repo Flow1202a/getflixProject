@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required>
         </div>
         <div class="input-box">
-            <select name="security_question" id="security_question" required>
+            <select class="selectionBox" name="security_question" id="security_question" required>
                 <option value="" disabled selected>Choose a Security Question</option>
                 <option value="Quel est le nom de votre premier animal de compagnie ?">Quel est le nom de votre premier animal de compagnie ?</option>
                 <option value="Quel est le nom de jeune fille de votre mère ?">Quel est le nom de jeune fille de votre mère ?</option>
