@@ -1,4 +1,5 @@
 <?php
+session_start();
 global $pdo;
 require_once('../includes/db_connect.php');
 
@@ -21,6 +22,18 @@ if (!$movie) {
     die('Le film n\'existe pas.');
 }
 
+// Vérifier si l'utilisateur est connecté
+$user_id = $_SESSION['user_id'] ?? null;
+
+// Vérifier si le film est déjà dans les favoris
+$is_favorite = false;
+if ($user_id) {
+    $query = "SELECT * FROM user_movies WHERE user_id = :user_id AND movie_id = :movie_id AND favorite = 1";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute(['user_id' => $user_id, 'movie_id' => $idMovie]);
+    $is_favorite = $stmt->fetch(PDO::FETCH_ASSOC) ? true : false;
+}
+
 // URL de base pour les images et les bandes-annonces
 $base_image_url = 'https://image.tmdb.org/t/p/w500';
 $base_trailer = 'https://www.youtube.com/embed/';
@@ -35,7 +48,6 @@ $base_trailer = 'https://www.youtube.com/embed/';
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
     <link rel="stylesheet" href="../style/movieStyle.css">
     <link rel="stylesheet" href="../style/style.css">
-
 </head>
 <body>
 
@@ -117,6 +129,20 @@ $base_trailer = 'https://www.youtube.com/embed/';
 
     <div class="rating reveal">
        </br><p> Note :</p> <?php echo htmlspecialchars($movie['rating']) . '/10'; ?>
+    </div>
+
+    <!-- Bouton Étoile pour ajouter aux favoris -->
+    <div class="favorite-section">
+        <?php if ($user_id): ?>
+            <form method="post" action="toggle_favorite.php">
+                <input type="hidden" name="movie_id" value="<?php echo $idMovie; ?>">
+                <button type="submit" name="toggle_favorite" class="favorite-btn">
+                    <?php echo $is_favorite ? '★' : '☆'; ?>
+                </button>
+            </form>
+        <?php else: ?>
+            <p>Connectez-vous pour ajouter ce film à vos favoris.</p>
+        <?php endif; ?>
     </div>
 
     <div class="actor_name reveal">
