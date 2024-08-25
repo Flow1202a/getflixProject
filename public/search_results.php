@@ -68,7 +68,31 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <header>
-        <h1>Résultats pour "<?php echo htmlspecialchars($search_term); ?>"</h1>
+    <nav class="nav position-fixed w-100">
+        <i class="uil uil-bars navOpenBtn"></i>
+            <a href="index.php" class="logo">GetFlixDeNullos</a>
+
+        <ul class="nav-links align-items-center">
+            <i class="uil uil-times navCloseBtn"></i>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="categories.php">Categories</a></li>
+            <li><a href="#">WatchList</a></li>
+            <li><a href="../includes/back_office.php">Account</a></li>
+            <li><a href="logintest.php">Connexion</a></li>
+        </ul>
+
+        <i class="uil uil-search search-icon" id="searchIcon"></i>
+        <div class="search-box">
+            <i class="uil uil-search search-icon"></i>
+            <!-- Formulaire de recherche -->
+            <form action="search_results.php" method="get">
+                <input class="searchTarget" type="text" name="q" placeholder="Rechercher un film, un artiste, ou un genre..." />
+                <!-- Le bouton est nécessaire pour les soumissions par "Entrer", mais reste invisible -->
+                <button type="submit" style="display: none;"></button>
+            </form>
+        </div>
+    </nav>
+
     </header>
     <div class="results-container">
         <?php if (empty($movies)): ?>
@@ -79,7 +103,7 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <img src="<?php echo htmlspecialchars($base_image_url . htmlspecialchars($movie['movies_image'])); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($movie['title']); ?>">
                     <div class="card-body align-content-center">
                         <h5 class="card-title" style="color: #EED6D3"><?php echo htmlspecialchars($movie['title']); ?></h5>
-                        <a href="movie.php?id=<?php echo htmlspecialchars($movie['id']); ?>" class="btn boutonDetails btn-primary">Voir les détails</a>
+                        <a  href="movie.php?id=<?php echo htmlspecialchars($movie['id']); ?>" class="btn boutonDetails btn-primary">Voir les détails</a>
                     </div>
                 </div>
             <?php endforeach; ?>
