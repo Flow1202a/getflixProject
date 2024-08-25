@@ -1,4 +1,5 @@
 <?php
+session_start();  // Assurez-vous que la session est démarrée
 global $pdo;
 require_once '../includes/db_connect.php';
 
@@ -35,7 +36,11 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li><a href="#">Categories</a></li>
             <li><a href="#">WatchList</a></li>
             <li><a href="../includes/back_office.php">Account</a></li>
-            <li><a href="logintest.php">Connexion</a></li>
+            <?php if (isset($_SESSION['role'])): ?>
+                <li><a href="../includes/logout.php">Se déconnecter</a></li>
+            <?php else: ?>
+                <li><a href="logintest.php">Connexion</a></li>
+            <?php endif; ?>
         </ul>
 
         <i class="uil uil-search search-icon" id="searchIcon"></i>
@@ -48,78 +53,20 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <article class="container mb-5 mt-5">
     <div class="row flex-wrap d-flex justify-content-between align-content-center">
-
-            <?php for ($i = 0; $i < 25; $i++): ?>
-                <?php if (isset($movies[$i])): ?>
-                    <?php $movie = $movies[$i]; ?>
-                    <div class="card moviecarte col-xs-12 col-sm-6 col-md-3 col-lg-2 mb-5 me-1">
-                        <img src="<?php echo htmlspecialchars($base_image_url . htmlspecialchars($movie['movies_image'])); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($movie['title']); ?>">
-                        <div class="card-body align-content-center">
-                            <h5 class="card-title" style="color: #EED6D3"><?php echo htmlspecialchars($movie['title']); ?></h5>
-                            <a href="movie.php?id=<?php echo htmlspecialchars($movie['id']); ?>" class="btn boutonDetails btn-primary">Voir les détails</a>
-                        </div>
-                    </div>
-                <?php endif; ?>
-            <?php endfor; ?>
+        <?php foreach ($movies as $movie): ?>
+            <div class="card moviecarte col-xs-12 col-sm-6 col-md-3 col-lg-2 mb-5 me-1">
+                <img src="<?php echo htmlspecialchars($base_image_url . htmlspecialchars($movie['movies_image'])); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($movie['title']); ?>">
+                <div class="card-body align-content-center">
+                    <h5 class="card-title" style="color: #EED6D3"><?php echo htmlspecialchars($movie['title']); ?></h5>
+                    <a href="movie.php?id=<?php echo htmlspecialchars($movie['id']); ?>" class="btn boutonDetails btn-primary">Voir les détails</a>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
 </article>
 
 <section class="footer">
-    <div class="footer-row">
-        <div class="footer-col">
-            <h4>Info</h4>
-            <ul class="links">
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Compressions</a></li>
-                <li><a href="#">Customers</a></li>
-                <li><a href="#">Service</a></li>
-                <li><a href="#">Collection</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-col">
-            <h4>Explore</h4>
-            <ul class="links">
-                <li><a href="#">Free Designs</a></li>
-                <li><a href="#">Latest Designs</a></li>
-                <li><a href="#">Themes</a></li>
-                <li><a href="#">Popular Designs</a></li>
-                <li><a href="#">Art Skills</a></li>
-                <li><a href="#">New Uploads</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-col">
-            <h4>Legal</h4>
-            <ul class="links">
-                <li><a href="#">Customer Agreement</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">GDPR</a></li>
-                <li><a href="#">Security</a></li>
-                <li><a href="#">Testimonials</a></li>
-                <li><a href="#">Media Kit</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-col">
-            <h4>Newsletter</h4>
-            <p>
-                Subscribe to our newsletter for a weekly dose
-                of news, updates, helpful tips, and
-                exclusive offers.
-            </p>
-            <form action="#">
-                <input type="text" placeholder="Your email" required>
-                <button type="submit">SUBSCRIBE</button>
-            </form>
-            <div class="icons">
-                <i class="fa-brands fa-facebook-f"></i>
-                <i class="fa-brands fa-twitter"></i>
-                <i class="fa-brands fa-linkedin"></i>
-                <i class="fa-brands fa-github"></i>
-            </div>
-        </div>
-    </div>
+    <!-- Reste de ton code... -->
 </section>
 
 </body>
