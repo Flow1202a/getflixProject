@@ -76,7 +76,7 @@ sort($genres);
 
             <?php foreach ($movies as $movie): ?>
                 <div class="movie">
-                    <img src="<?php echo htmlspecialchars($base_image_url . htmlspecialchars($movie['movies_image'])); ?>" alt="<?php echo htmlspecialchars($movie['title']); ?>" </a>
+                    <img src="<?php echo htmlspecialchars($base_image_url . htmlspecialchars($movie['movies_image'])); ?>" alt="<?php echo htmlspecialchars($movie['title']); ?>">
                     <a href="movie.php?id=<?php echo htmlspecialchars($movie['id']); ?>" class="text-align-center"><?php echo htmlspecialchars($movie['title']); ?></a>
                 </div>
             <?php endforeach; ?>
