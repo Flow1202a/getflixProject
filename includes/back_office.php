@@ -1,12 +1,13 @@
 <?php
 global $pdo, $query;
 session_start();
+    //require_once('db_connect.php');
 
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
     die("Accès refusé : Vous n'êtes pas connecté.");
 }
 
-require_once('../includes/db_connect.php');
+require_once '../includes/db_connect.php';
 
 // Supprimer un message
 if (isset($_GET['delete'])) {
@@ -91,9 +92,16 @@ try {
         th {
             background-color: #f4f4f4;
         }
+        .logout {
+            text-align: right;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
+<div class="logout">
+    <a href="../includes/logout.php">Se déconnecter</a>
+</div>
 <h1>Gestion des Messages</h1>
 <p><a href="../public/index.php">Retour à l'accueil</a></p>
 <table>

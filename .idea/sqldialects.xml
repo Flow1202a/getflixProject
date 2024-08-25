@@ -2,11 +2,18 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/includes/back_office.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/public/account.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/public/categories.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/public/fetch_movies.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/public/forgot_password.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/public/index.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/public/logintest.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/public/movie.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/public/register.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/public/reset_password.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/public/search_results.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/public/security_questions.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/public/toggle_favorite.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/public/verify_2fa.php" dialect="GenericSQL" />
   </component>
 </project>

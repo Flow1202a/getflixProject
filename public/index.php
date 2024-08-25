@@ -1,4 +1,5 @@
 <?php
+session_start();  // Assurez-vous que la session est démarrée
 global $pdo;
 require_once '../includes/db_connect.php';
 
@@ -17,6 +18,7 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../style/style.css">
+    <script src="../javascript/script.js" defer></script>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Welcome</title>
@@ -33,8 +35,12 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li><a href="index.php">Home</a></li>
             <li><a href="categories.php">Categories</a></li>
             <li><a href="#">WatchList</a></li>
-            <li><a href="../includes/back_office.php">Account</a></li>
-            <li><a href="logintest.php">Connexion</a></li>
+            <li><a href="../public/account.php">Account</a></li>
+            <?php if (isset($_SESSION['role'])): ?>
+                <li><a href="../includes/logout.php">Se déconnecter</a></li>
+            <?php else: ?>
+                <li><a href="logintest.php">Connexion</a></li>
+            <?php endif; ?>
         </ul>
 
         <i class="uil uil-search search-icon" id="searchIcon"></i>
