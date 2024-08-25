@@ -4,7 +4,7 @@ session_start();
 require_once('../includes/db_connect.php');
 $base_image_url = 'https://image.tmdb.org/t/p/w500';
 
-// Vérifier si l'utilisateur est connecté
+//Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['role'])) {
     die("Accès refusé");
 }
