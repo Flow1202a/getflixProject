@@ -7,8 +7,8 @@ $base_image_url = 'https://image.tmdb.org/t/p/w500';
 $search_term = isset($_GET['q']) ? $_GET['q'] : '';
 
 if ($search_term) {
-    // Rechercher les films correspondant au terme de recherche
-    $query = "SELECT * FROM movies WHERE title LIKE :search_term";
+    // Rechercher les films correspondant au terme de recherche dans les titres, les genres et les noms d'artistes
+    $query = "SELECT * FROM movies WHERE title LIKE :search_term OR movies_genres LIKE :search_term OR artist_name LIKE :search_term";
     $stmt = $pdo->prepare($query);
     $stmt->execute([':search_term' => '%' . $search_term . '%']);
     $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);

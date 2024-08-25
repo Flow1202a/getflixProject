@@ -15,6 +15,19 @@ header {
 
     z-index: 1000;
 }
+.movies-container {
+    display: flex;
+    flex-wrap: wrap; /* Permettre le retour à la ligne */
+    justify-content: center; /* Centrer les éléments horizontalement */
+    padding: 20px;
+    gap: 15px; /* Espacement entre les éléments */
+}
+
+.movie {
+    flex: 0 1 200px; /* Largeur minimale de 200px, mais permet l'adaptation à la taille de l'écran */
+    text-align: center;
+    margin-bottom: 20px;
+}
 
 /*navbar*/
 * {
