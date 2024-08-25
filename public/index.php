@@ -24,14 +24,14 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
 
 <header>
-    <nav class="nav position-absolute">
+    <nav class="nav position-fixed w-100">
         <i class="uil uil-bars navOpenBtn"></i>
-        <a href="#" class="logo">GetFlixDeNullos</a>
+            <a href="index.php" class="logo">GetFlixDeNullos</a>
 
         <ul class="nav-links align-items-center">
             <i class="uil uil-times navCloseBtn"></i>
             <li><a href="index.php">Home</a></li>
-            <li><a href="#">Categories</a></li>
+            <li><a href="categories.php">Categories</a></li>
             <li><a href="#">WatchList</a></li>
             <li><a href="../includes/back_office.php">Account</a></li>
             <li><a href="logintest.php">Connexion</a></li>
@@ -42,7 +42,7 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <i class="uil uil-search search-icon"></i>
             <!-- Formulaire de recherche -->
             <form action="search_results.php" method="get">
-                <input class="searchTarget"type="text" name="q" placeholder="Rechercher un film, un artiste, ou un genre..." />
+                <input class="searchTarget" type="text" name="q" placeholder="Rechercher un film, un artiste, ou un genre..." />
                 <!-- Le bouton est nécessaire pour les soumissions par "Entrer", mais reste invisible -->
                 <button type="submit" style="display: none;"></button>
             </form>
@@ -50,8 +50,22 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </nav>
 </header>
 
+<!-- Jumbotron -->
+<div class="p-5 justify-content-center text-center bg-image rounded-3 d-flex" style="background-image: url('/'); height: 400px; margin-top: 70px;">
+    <div class="mask" style="background-image: url('../images/registerBackGround.jpg');">
+        <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-white">
+                <h1 class="mb-3">Découvrez les 100 films les mieux notés</h1>
+                <h4 class="mb-3"></h4>
+                <a data-mdb-ripple-init class="btn btn-outline-light btn-lg" href="categories.php" role="button">Nos autres catégories</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Jumbotron -->
 
-<article class="container mb-5 mt-5">
+
+<article class="container mb-5">
     <div class="row flex-wrap d-flex justify-content-between align-content-center">
 
             <?php for ($i = 0; $i < 100; $i++): ?>
