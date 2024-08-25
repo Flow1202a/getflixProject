@@ -4,11 +4,6 @@ session_start();
 require_once('../includes/db_connect.php');
 $base_image_url = 'https://image.tmdb.org/t/p/w500';
 
-// Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['role'])) {
-    die("Accès refusé");
-}
-
 // Liste des genres autorisés
 $allowed_genres = [
     'drama',
@@ -54,6 +49,8 @@ sort($genres);
     <meta charset="UTF-8">
     <title>Catégories de Films</title>
     <link rel="stylesheet" href="../style/categorieStyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
 </head>
 <body>
 <header>
@@ -79,8 +76,8 @@ sort($genres);
 
             <?php foreach ($movies as $movie): ?>
                 <div class="movie">
-                    <img src="<?php echo htmlspecialchars($base_image_url . htmlspecialchars($movie['movies_image'])); ?>" alt="<?php echo htmlspecialchars($movie['title']); ?>">
-                    <h3><?php echo htmlspecialchars($movie['title']); ?></h3>
+                    <img src="<?php echo htmlspecialchars($base_image_url . htmlspecialchars($movie['movies_image'])); ?>" alt="<?php echo htmlspecialchars($movie['title']); ?>" </a>
+                    <a href="movie.php?id=<?php echo htmlspecialchars($movie['id']); ?>" class="text-align-center"><?php echo htmlspecialchars($movie['title']); ?></a>
                 </div>
             <?php endforeach; ?>
         </div>
