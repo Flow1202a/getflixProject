@@ -351,6 +351,19 @@ article {
     padding-top: 70px; /* Ajustez cette valeur pour correspondre à la hauteur de votre barre de navigation fixe */
 }
 
+/* Style pour boutton favoris*/
+.favorite-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #FFD700; /* Couleur or pour l'étoile */
+}
+
+.favorite-btn:hover {
+    color: #FFA500; /* Couleur or foncé pour l'étoile en survol */
+}
+
 /* Style pour le pied de page */
 .footer {
     position: relative;

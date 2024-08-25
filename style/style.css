@@ -191,6 +191,36 @@ a {
 
   }
 }
+/* Css pour Account*/
+.favorites-slider {
+  display: flex;
+  overflow-x: scroll;
+  gap: 15px;
+  padding: 20px 0;
+}
+
+.favorite-item {
+  flex: 0 0 auto;
+  width: 200px;
+  text-align: center;
+}
+
+.favorite-item img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.favorite-item p {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.favorites-slider.active {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
 
 article{
   padding-top : 70px;

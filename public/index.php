@@ -35,7 +35,7 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li><a href="index.php">Home</a></li>
             <li><a href="#">Categories</a></li>
             <li><a href="#">WatchList</a></li>
-            <li><a href="../includes/back_office.php">Account</a></li>
+            <li><a href="../public/account.php">Account</a></li>
             <?php if (isset($_SESSION['role'])): ?>
                 <li><a href="../includes/logout.php">Se déconnecter</a></li>
             <?php else: ?>

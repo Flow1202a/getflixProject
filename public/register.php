@@ -3,37 +3,43 @@ global $pdo;
 session_start();
 require_once('../includes/db_connect.php'); // Inclure le fichier de connexion à la base de données
 
+$success_message = ''; // Initialize an empty success message
+$error_message = '';   // Initialize an empty error message
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Hacher le mot de passe
-    $security_question = password_hash($_POST['security_question'], PASSWORD_DEFAULT); // Hacher la question de sécurité
-    $security_answer = password_hash($_POST['security_answer'], PASSWORD_DEFAULT); // Hacher la réponse à la question de sécurité
+    $confirm_password = $_POST['confirm-password'];
 
-    try {
-        // Insérer l'utilisateur dans la table users
-        $stmt = $pdo->prepare("INSERT INTO users (username, email, created_at) VALUES (:username, :email, NOW())");
-        $stmt->execute([
-            ':username' => $username,
-            ':email' => $email,
-        ]);
-        $user_id = $pdo->lastInsertId(); // Récupérer l'ID de l'utilisateur inséré
+    if ($password !== $confirm_password) {
+        $error_message = "Passwords do not match. Please try again.";
+    } else {
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Hacher le mot de passe
 
-        // Insérer le mot de passe haché et les informations de sécurité dans la table user_conf
-        $stmt = $pdo->prepare("INSERT INTO user_conf (user_id, password, security_question, security_answer) VALUES (:user_id, :password, :security_question, :security_answer)");
-        $stmt->execute([
-            ':user_id' => $user_id,
-            ':password' => $hashed_password,
-            ':security_question' => $security_question,
-            ':security_answer' => $security_answer
-        ]);
+        try {
+            // Insérer l'utilisateur dans la table users
+            $stmt = $pdo->prepare("INSERT INTO users (username, email, created_at) VALUES (:username, :email, NOW())");
+            $stmt->execute([
+                ':username' => $username,
+                ':email' => $email,
+            ]);
+            $user_id = $pdo->lastInsertId(); // Récupérer l'ID de l'utilisateur inséré
 
-        echo "Inscription réussie.";
-    } catch (PDOException $e) {
-        echo "Erreur : " . $e->getMessage();
+            // Insérer le mot de passe haché dans la table user_conf
+            $stmt = $pdo->prepare("INSERT INTO user_conf (user_id, password) VALUES (:user_id, :password)");
+            $stmt->execute([
+                ':user_id' => $user_id,
+                ':password' => $hashed_password
+            ]);
+
+            $success_message = "Registration successful!";
+        } catch (PDOException $e) {
+            $error_message = "Error: " . $e->getMessage();
+        }
     }
 }
+?>
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,6 +54,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <header>Sign Up</header>
     <form method="post">
         <div class="input-box">
+            <?php if ($success_message): ?>
+                <div class="success-message">
+                    <?php echo $success_message; ?>
+                </div>
+            <?php elseif ($error_message): ?>
+                <div class="error-message">
+                    <?php echo $error_message; ?>
+                </div>
+            <?php endif;?>
             <input type="text" name="username" id="username" placeholder="Username" required>
         </div>
         <div class="input-box">
