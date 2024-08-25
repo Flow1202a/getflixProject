@@ -52,11 +52,44 @@ sort($genres);
 
 </head>
 <body>
+
+<header>
+    <nav class="nav position-fixed w-100">
+        <i class="uil uil-bars navOpenBtn"></i>
+        <a href="index.php" class="logo">GetFlixDeNullos</a>
+
+        <ul class="nav-links align-items-center">
+            <i class="uil uil-times navCloseBtn"></i>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="categories.php">Categories</a></li>
+            <li><a href="#">WatchList</a></li>
+            <li><a href="../public/account.php">Account</a></li>
+            <?php if (isset($_SESSION['role'])): ?>
+                <li><a href="../includes/logout.php">Se déconnecter</a></li>
+            <?php else: ?>
+                <li><a href="logintest.php">Connexion</a></li>
+            <?php endif; ?>
+        </ul>
+
+        <i class="uil uil-search search-icon" id="searchIcon"></i>
+        <div class="search-box">
+            <i class="uil uil-search search-icon"></i>
+            <!-- Formulaire de recherche -->
+            <form action="search_results.php" method="get">
+                <input class="searchTarget" type="text" name="q" placeholder="Rechercher un film, un artiste, ou un genre..." />
+                <!-- Le bouton est nécessaire pour les soumissions par "Entrer", mais reste invisible -->
+                <button type="submit" style="display: none;"></button>
+            </form>
+            <?php foreach ($genres as $genre): ?>
+                <a href="#<?php echo htmlspecialchars($genre); ?>"><?php echo htmlspecialchars($genre); ?></a>
+            <?php endforeach; ?>
+        </div>
+    </nav>
+</header>
+
 <header>
     <nav>
-        <?php foreach ($genres as $genre): ?>
-            <a href="#<?php echo htmlspecialchars($genre); ?>"><?php echo htmlspecialchars($genre); ?></a>
-        <?php endforeach; ?>
+
     </nav>
 </header>
 
