@@ -2,6 +2,7 @@
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
     <data-source source="LOCAL" name="getflix_db@localhost" uuid="c8697d96-32b5-41b3-83e5-b70b87838440">
+    <data-source source="LOCAL" name="getflix_db@localhost" uuid="a6ead2b6-ae4d-45ae-a033-d7f4533af518">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>

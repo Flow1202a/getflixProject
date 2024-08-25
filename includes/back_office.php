@@ -1,6 +1,7 @@
 <?php
 global $pdo, $query;
 session_start();
+    //require_once('db_connect.php');
 
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
     die("Accès refusé : Vous n'êtes pas connecté.");

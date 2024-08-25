@@ -3,7 +3,7 @@ function fetchMoviesFromApi() {
     $curl = curl_init();
 
     curl_setopt_array($curl, [
-        CURLOPT_URL => "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=8",
+        CURLOPT_URL => "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=44",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,

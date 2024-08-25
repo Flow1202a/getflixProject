@@ -42,55 +42,71 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 ?>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Form</title>
-    <link rel="stylesheet" href="../style/registerLoginStyle.css">
-</head>
-<body>
-<div class="wrapper">
-    <header>Sign Up</header>
-    <form method="post">
-        <div class="input-box">
-            <?php if ($success_message): ?>
-                <div class="success-message">
-                    <?php echo $success_message; ?>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Register Form</title>
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+        <link rel="stylesheet" href="../style/registerLoginStyle.css">
+        <link rel="stylesheet" href="../style/style.css">
+
+    </head>
+    <body>
+    <header>
+        <nav class="nav position-absolute">
+            <i class="uil uil-bars navOpenBtn"></i>
+            <a href="#" class="logo">GetFlixDeNullos</a>
+
+            <ul class="nav-links align-items-center">
+                <i class="uil uil-times navCloseBtn"></i>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">WatchList</a></li>
+                <li><a href="../includes/back_office.php">Account</a></li>
+                <li><a href="logintest.php">Connexion</a></li>
+            </ul>
+
+            <i class="uil uil-search search-icon" id="searchIcon"></i>
+            <div class="search-box">
+                <i class="uil uil-search search-icon"></i>
+                <input type="text" placeholder="Search here..." />
+            </div>
+        </nav>
+    </header>
+        <body>
+            <div class="wrapper">
+                <header>Sign Up</header>
+                    <form method="post">
+                        <?php if ($success_message): ?>
+                            <div class="success-message">
+                                <?php echo $success_message; ?>
+                            </div>
+                        <?php elseif ($error_message): ?>
+                            <div class="error-message">
+                                <?php echo $error_message; ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <div class="input-box">
+                            <input type="text" name="username" id="username" placeholder="Username" required>
+                        </div>
+                        <div class="input-box">
+                            <input type="email" name="email" id="email" placeholder="E-mail" required>
+                        </div>
+                        <div class="input-box">
+                            <input type="password" name="password" id="password" placeholder="Password" required>
+                        </div>
+                        <div class="input-box">
+                            <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password"
+                                   required>
+                        </div>
+                        <input type="submit" name="submit" id="submit" value="REGISTER" class="btn">
+                    </form>
+                <div class="register-link">
+                    <p>Already have an account? <a href="../public/logintest.php">Sign In</a></p>
                 </div>
-            <?php elseif ($error_message): ?>
-                <div class="error-message">
-                    <?php echo $error_message; ?>
-                </div>
-            <?php endif;?>
-            <input type="text" name="username" id="username" placeholder="Username" required>
-        </div>
-        <div class="input-box">
-            <input type="email" name="email" id="email" placeholder="E-mail" required>
-        </div>
-        <div class="input-box">
-            <input type="password" name="password" id="password" placeholder="Password" required>
-        </div>
-        <div class="input-box">
-            <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required>
-        </div>
-        <div class="input-box">
-            <select class="selectionBox" name="security_question" id="security_question" required>
-                <option value="" disabled selected>Choose a Security Question</option>
-                <option value="Quel est le nom de votre premier animal de compagnie ?">Quel est le nom de votre premier animal de compagnie ?</option>
-                <option value="Quel est le nom de jeune fille de votre mère ?">Quel est le nom de jeune fille de votre mère ?</option>
-                <option value="Quel est le nom de votre école primaire ?">Quel est le nom de votre école primaire ?</option>
-                <option value="Quel est le nom de la ville où vous êtes né(e) ?">Quel est le nom de la ville où vous êtes né(e) ?</option>
-            </select>
-        </div>
-        <div class="input-box">
-            <input type="text" name="security_answer" id="security_answer" placeholder="Security Answer" required>
-        </div>
-        <input type="submit" name="submit" id="submit" value="REGISTER" class="btn">
-    </form>
-    <div class="register-link">
-        <p>Already have an account? <a href="../public/logintest.php">Sign In</a></p>
-    </div>
-</div>
-</body>
+            </div>
+        </body>
 </html>
+

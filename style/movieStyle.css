@@ -2,7 +2,7 @@
 
 /* Style de base */
 body {
-    font-family: "Poppins Medium", sans-serif;
+    font-family: "Poppins", sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
@@ -79,7 +79,12 @@ iframe.trailer {
     color: #555;
     text-align: center; /* Centrage du classement */
 }
-
+.rel_date{
+    text-align: center;
+}
+.movie_genres{
+    text-align: center;
+}
 /* Style pour le nom de l'acteur */
 .actor_name {
     font-size: 1.2em;
