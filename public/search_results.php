@@ -55,12 +55,6 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
             background-color: #000;
             text-align: center;
         }
-        .results-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 20px;
-        }
         .movie {
             width: 200px;
             margin: 15px;

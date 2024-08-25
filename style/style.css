@@ -141,6 +141,7 @@ a {
 }
 .card{
   --bs-card-bg: rgb(23, 23, 23) !important;
+
 }
 .card-body{
   text-align: center;
@@ -360,9 +361,16 @@ article{
 }
 
 
-.mask{
+.mask {
   height: 360px;
-  width: 1600px
-;
+  width: 1600px;
   border-radius: 10px;
 }
+
+.results-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+}
+
