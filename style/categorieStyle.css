@@ -1,72 +1,204 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-
-body{
-    font-family: "Poppins", serif ;
+body {
     background: rgb(12,45,72);
     background: linear-gradient(270deg, rgba(12,45,72,1) 0%, rgba(20,93,160,1) 50%, rgba(12,45,72,1) 100%);
-
+    font-family: "Poppins Medium", serif ;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
 }
+
 header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #000;
-    padding: 10px 0;
+
     z-index: 1000;
 }
+
 nav {
     display: flex;
     justify-content: center;
     margin: 0 auto;
     overflow-x: auto;
     white-space: nowrap;
+    background-color: #0c2d48; /* Ajustement pour une meilleure visibilité */
+    padding: 10px 0;
 }
+
 nav a {
     color: #fff;
     padding: 10px 20px;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 1rem;
+    font-weight: bold;
+    white-space: nowrap;
+    border-radius: 7px;
 }
+
 nav a:hover {
-    background-color: #444;
+    background-color: #2e8bc0;
 }
+
 .category {
     margin: 80px 0 20px 0;
     position: relative;
+    padding: 0 5%;
 }
+
 h2 {
     margin-left: 20px;
+    font-size: 1.5rem;
 }
+
 .movies-container {
     display: flex;
-    overflow: hidden;
+    overflow: hidden; /* Suppression de la barre de défilement */
     padding: 20px;
     scroll-behavior: smooth;
+    gap: 15px; /* Ajout d'un espacement entre les éléments */
 }
+
 .movie {
     flex: 0 0 auto;
-    width: 200px;
+    width: 200px; /* Rétablissement de la largeur initiale pour grand écran */
+    text-align: center;
     margin-right: 10px;
 }
+
 .movie img {
     width: 100%;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
+
+.movie a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 100%;
+    background-color: #2e8bc0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.movie a:hover {
+    background-color: #145da0;
+    transform: translateY(-3px);
+}
+
+.movie a:active {
+    background-color: #0c2d48;
+    transform: translateY(-1px);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .nav-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 2em;
+    font-size: 2rem;
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
     border: none;
+    border-radius: 12px;
     cursor: pointer;
     padding: 10px;
+    z-index: 1000;
 }
+
 .nav-arrow.left {
     left: 0;
+
 }
+
 .nav-arrow.right {
     right: 0;
+}
+
+/* Media Queries pour rendre la page responsive sur petits écrans */
+@media (max-width: 1024px) {
+    .movies-container {
+        padding: 15px;
+        gap: 10px;
+
+    }
+
+    .movie {
+        width: 150px; /* Réduction de la taille des affiches sur petits écrans */
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .movies-container {
+        padding: 10px;
+        gap: 8px;
+
+    }
+
+    .movie {
+        width: 130px; /* Encore plus petit pour les petits écrans */
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        text-align: center; /* Centrer les titres des catégories */
+    }
+
+    nav {
+        flex-wrap: wrap; /* Permettre aux liens de se déplacer sur plusieurs lignes */
+        justify-content: flex-start; /* Alignement à gauche pour une meilleure lisibilité */
+    }
+
+    nav a {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    .nav-arrow {
+        font-size: 1.5rem;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .movies-container {
+        padding: 5px;
+        gap: 5px;
+
+    }
+
+    .movie {
+        width: 100px; /* Pour les téléphones */
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    nav a {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+
+    .nav-arrow {
+        font-size: 1.2rem;
+        padding: 5px;
+    }
 }

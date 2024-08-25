@@ -4,15 +4,6 @@ session_start();
 require_once('../includes/db_connect.php');
 $base_image_url = 'https://image.tmdb.org/t/p/w500';
 
-<<<<<<< HEAD
-=======
-//Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['role'])) {
-    die("Accès refusé");
-}
-
->>>>>>> cffee3845227eaa4d4e51ff9619a0a1c2273411f
-// Liste des genres autorisés
 $allowed_genres = [
     'drama',
     'action',
@@ -72,7 +63,7 @@ sort($genres);
 <?php foreach ($genres as $genre): ?>
     <div class="category" id="<?php echo htmlspecialchars($genre); ?>">
         <h2><?php echo htmlspecialchars($genre); ?></h2>
-        <button class="nav-arrow left" onclick="scrollLeft('<?php echo htmlspecialchars($genre); ?>')">&#9664;</button>
+        <button class="nav-arrow left" onclick="scrollCategoryLeft('<?php echo htmlspecialchars($genre); ?>')">&#9664;</button>
         <div class="movies-container" id="container-<?php echo htmlspecialchars($genre); ?>">
             <?php
             // Récupérer les films pour chaque genre avec une correspondance exacte
@@ -83,26 +74,27 @@ sort($genres);
             ?>
 
             <?php foreach ($movies as $movie): ?>
-                <div class="movie">
+                <div class="movie align-items-center">
                     <img src="<?php echo htmlspecialchars($base_image_url . htmlspecialchars($movie['movies_image'])); ?>" alt="<?php echo htmlspecialchars($movie['title']); ?>">
-                    <a href="movie.php?id=<?php echo htmlspecialchars($movie['id']); ?>" class="text-align-center"><?php echo htmlspecialchars($movie['title']); ?></a>
+                    <a href="movie.php?id=<?php echo htmlspecialchars($movie['id']); ?>"><?php echo htmlspecialchars($movie['title']); ?></a>
                 </div>
             <?php endforeach; ?>
         </div>
-        <button class="nav-arrow right" onclick="scrollRight('<?php echo htmlspecialchars($genre); ?>')">&#9654;</button>
+        <button class="nav-arrow right" onclick="scrollCategoryRight('<?php echo htmlspecialchars($genre); ?>')">&#9654;</button>
     </div>
 <?php endforeach; ?>
 
 <script>
-    function scrollLeft(categoryId) {
+    function scrollCategoryLeft(categoryId) {
         var container = document.getElementById('container-' + categoryId);
         container.scrollBy({ left: -1500, behavior: 'smooth' });
     }
 
-    function scrollRight(categoryId) {
+    function scrollCategoryRight(categoryId) {
         var container = document.getElementById('container-' + categoryId);
         container.scrollBy({ left: 1500, behavior: 'smooth' });
     }
 </script>
+Et dans ton HT
 </body>
 </html>

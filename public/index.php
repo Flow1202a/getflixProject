@@ -72,7 +72,7 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php if (isset($movies[$i])): ?>
                     <?php $movie = $movies[$i]; ?>
                     <div class="card moviecarte col-xs-12 col-sm-6 col-md-3 col-lg-2 mb-5 me-1 text-align-center reveal">
-                        <img src="<?php echo htmlspecialchars($base_image_url . htmlspecialchars($movie['movies_image'])); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($movie['title']); ?>">
+                        <img src="<?php echo htmlspecialchars($base_image_url . htmlspecialchars($movie['movies_image'])); ?>"   href="" class="card-img-top" alt="<?php echo htmlspecialchars($movie['title']); ?>">
                         <div class="card-body align-content-center">
                             <h5 class="card-title" style="color: #EED6D3"><?php echo htmlspecialchars($movie['title']); ?></h5>
                             <a href="movie.php?id=<?php echo htmlspecialchars($movie['id']); ?>" class="btn boutonDetails btn-primary">Voir les détails</a>
