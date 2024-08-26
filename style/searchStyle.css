@@ -17,18 +17,14 @@ header {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/*navbar*/
+/* Navbar principale */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 
 }
-.imgLogo{
-    height: 80px;
-    width: 80px;
-    border-radius: 12px;
-}
+
 nav ul{
     padding: 0;
 }
@@ -71,19 +67,10 @@ a {
     color: #d2e5ec;
     text-decoration: none;
 }
+
 .nav.openSearch .nav-links a {
     opacity: 0;
     pointer-events: none;
-}
-.nav .nav-links a:hover{
-    background-color: #145da0;
-    transform: translateY(-3px);
-    border-radius: 7px;
-}
-.nav .nav-links a:active {
-    background-color: #0c2d48;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .nav .search-icon {
     color: #d2e5ec;
@@ -124,6 +111,16 @@ a {
 .nav .navCloseBtn {
     display: none;
 }
+
+/* Disposition en grille pour les résultats de recherche */
+.search-results-container {
+    display: flex;
+    flex-wrap: wrap; /* Permettre le retour à la ligne */
+    justify-content: center; /* Centrer les éléments horizontalement */
+    padding: 20px;
+    gap: 15px; /* Espacement entre les éléments */
+}
+
 
 /* responsive */
 @media screen and (max-width: 1160px) {
@@ -222,80 +219,27 @@ a {
 
     }
 }
-/* Css pour Account*/
-.favorites-slider {
-    display: flex;
-    overflow-x: scroll;
-    gap: 15px;
-    padding: 20px 0;
-}
 
-.favorite-item {
-    flex: 0 0 auto;
+/* Réglages pour les cartes de films */
+.search-movie {
+    flex: 0 1 200px;
+    text-align: center;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     width: 200px;
-    text-align: center;
+    max-width: 200px; /* Fixer la largeur maximale */
+    height: 340px; /* Fixer une hauteur uniforme pour toutes les cartes */
 }
-
-.favorite-item img {
+.search-movie img {
     width: 100%;
-    border-radius: 10px;
-}
-
-.favorite-item p {
-    margin-top: 10px;
-    font-weight: bold;
-    color: #333;
-}
-
-.favorites-slider.active {
-    cursor: grabbing;
-
-}
-
-
-article{
-    padding-top : 70px;
-}
-
-nav a:hover {
-    background-color: #2e8bc0;
-}
-
-.category {
-    margin: 80px 0 20px 0;
-    position: relative;
-    padding: 0 5%;
-}
-
-h2 {
-    margin-left: 20px;
-    font-size: 1.5rem;
-    color: #bdd6df !important;
-
-}
-
-.movies-container {
-    display: flex;
-    overflow: hidden; /* Suppression de la barre de défilement */
-    padding: 20px;
-    scroll-behavior: smooth;
-    gap: 15px; /* Ajout d'un espacement entre les éléments */
-}
-
-.movie {
-    flex: 0 0 auto;
-    width: 200px; /* Rétablissement de la largeur initiale pour grand écran */
-    text-align: center;
-    margin-right: 10px;
-}
-
-.movie img {
-    width: 100%;
+    height: 300px; /* Fixer une hauteur uniforme pour les images */
     border-radius: 5px;
+    object-fit: cover; /* Remplir le cadre tout en conservant le ratio d'aspect */
     margin-bottom: 10px;
 }
 
-.movie a {
+.search-movie a{
     color: #ffffff;
     text-decoration: none;
     font-size: 1rem;
@@ -311,117 +255,51 @@ h2 {
     transition: background-color 0.3s ease, transform 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
-
-.movie a:hover {
+.search-movie a:hover {
     background-color: #145da0;
     transform: translateY(-3px);
 }
 
-.movie a:active {
+.search-movie a:active {
     background-color: #0c2d48;
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.nav-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 2rem;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.5);
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    padding: 10px;
-    z-index: 1000;
-}
-
-.nav-arrow.left {
-    left: 0;
-
-}
-
-.nav-arrow.right {
-    right: 0;
-}
-
-/* Media Queries pour rendre la page responsive sur petits écrans */
+/* Responsive: Ajustements pour les petits écrans */
 @media (max-width: 1024px) {
-    .movies-container {
+    .search-results-container {
         padding: 15px;
         gap: 10px;
-
     }
 
-    .movie {
+    .search-movie {
         width: 150px; /* Réduction de la taille des affiches sur petits écrans */
-    }
-
-    h2 {
-        font-size: 1.4rem;
     }
 }
 
 @media (max-width: 768px) {
-    .movies-container {
+    .search-results-container {
         padding: 10px;
         gap: 8px;
-
     }
 
-    .movie {
+    .search-movie {
         width: 130px; /* Encore plus petit pour les petits écrans */
     }
 
-    h2 {
-        font-size: 1.2rem;
-        text-align: center; /* Centrer les titres des catégories */
-    }
 
-    nav {
-        flex-wrap: wrap; /* Permettre aux liens de se déplacer sur plusieurs lignes */
-        justify-content: flex-start; /* Alignement à gauche pour une meilleure lisibilité */
-    }
-
-    nav a {
-        font-size: 0.9rem;
-        padding: 8px 16px;
-    }
-
-    .nav-arrow {
-        font-size: 1.5rem;
-        padding: 8px;
-    }
 }
 
 @media (max-width: 480px) {
-    .movies-container {
+    .search-results-container {
         padding: 5px;
         gap: 5px;
-
     }
 
-    .movie {
+    .search-movie {
         width: 100px; /* Pour les téléphones */
     }
 
-    h2 {
-        font-size: 1rem;
-    }
 
-    nav {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-    }
-
-    nav a {
-        font-size: 0.8rem;
-        padding: 5px 10px;
-    }
-
-    .nav-arrow {
-        font-size: 1.2rem;
-        padding: 5px;
-    }
 }

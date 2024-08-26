@@ -1,4 +1,5 @@
 <?php
+global $pdo;
 session_start();
 require_once('../includes/db_connect.php');
 $base_image_url = 'https://image.tmdb.org/t/p/w500';
@@ -22,18 +23,22 @@ if ($search_term) {
 <head>
     <meta charset="UTF-8">
     <title>Résultats de Recherche</title>
-    <link rel="stylesheet" href="../style/categorieStyle.css">
+    <link rel="stylesheet" href="../style/searchStyle.css">
+    <script src="../javascript/script.js" defer></script>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
 
 <header>
     <nav class="nav position-fixed w-100">
+        <i class="uil uil-bars navOpenBtn"></i>
         <a href="index.php" class="logo">GetFlixDeNullos</a>
+
         <ul class="nav-links align-items-center">
+            <i class="uil uil-times navCloseBtn"></i>
             <li><a href="index.php">Home</a></li>
             <li><a href="categories.php">Categories</a></li>
-            <li><a href="#">WatchList</a></li>
             <li><a href="../public/account.php">Account</a></li>
             <?php if (isset($_SESSION['role'])): ?>
                 <li><a href="../includes/logout.php">Se déconnecter</a></li>
@@ -42,27 +47,31 @@ if ($search_term) {
             <?php endif; ?>
         </ul>
 
+        <i class="uil uil-search search-icon" id="searchIcon"></i>
         <div class="search-box">
+            <i class="uil uil-search search-icon"></i>
+            <!-- Formulaire de recherche -->
             <form action="search_results.php" method="get">
-                <input class="searchTarget" type="text" name="q" placeholder="Rechercher un film, un artiste, ou un genre..." value="<?php echo htmlspecialchars($search_term); ?>" />
+                <input class="searchTarget" type="text" name="q" placeholder="Rechercher un film, un artiste, ou un genre..." />
+                <!-- Le bouton est nécessaire pour les soumissions par "Entrer", mais reste invisible -->
                 <button type="submit" style="display: none;"></button>
             </form>
         </div>
     </nav>
 </header>
 
-<div class="movies-container" style="padding-top: 80px;">
+<div class="search-results-container" style="padding-top: 80px;">
     <?php if (empty($movies)): ?>
         <p>Aucun résultat trouvé pour "<?php echo htmlspecialchars($search_term); ?>"</p>
     <?php else: ?>
         <?php foreach ($movies as $movie): ?>
-            <div class="movie align-items-center">
+            <div class="search-movie">
                 <img src="<?php echo htmlspecialchars($base_image_url . htmlspecialchars($movie['movies_image'])); ?>" alt="<?php echo htmlspecialchars($movie['title']); ?>">
                 <a href="movie.php?id=<?php echo htmlspecialchars($movie['id']); ?>"><?php echo htmlspecialchars($movie['title']); ?></a>
             </div>
         <?php endforeach; ?>
     <?php endif; ?>
 </div>
-
+<script src="../javascript/script.js" defer></script>
 </body>
 </html>

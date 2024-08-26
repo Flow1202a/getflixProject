@@ -52,23 +52,31 @@ $base_trailer = 'https://www.youtube.com/embed/';
 <body>
 
 <header>
-    <nav class="nav position-absolute">
+    <nav class="nav position-fixed w-100">
         <i class="uil uil-bars navOpenBtn"></i>
-        <a href="#" class="logo">GetFlixDeNullos</a>
+        <a href="index.php" class="logo">GetFlixDeNullos</a>
 
         <ul class="nav-links align-items-center">
             <i class="uil uil-times navCloseBtn"></i>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Categories</a></li>
-            <li><a href="#">WatchList</a></li>
-            <li><a href="#">Account</a></li>
-            <li><a href="#">Connexion</a></li>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="categories.php">Categories</a></li>
+            <li><a href="../public/account.php">Account</a></li>
+            <?php if (isset($_SESSION['role'])): ?>
+                <li><a href="../includes/logout.php">Se déconnecter</a></li>
+            <?php else: ?>
+                <li><a href="logintest.php">Connexion</a></li>
+            <?php endif; ?>
         </ul>
 
         <i class="uil uil-search search-icon" id="searchIcon"></i>
         <div class="search-box">
             <i class="uil uil-search search-icon"></i>
-            <input type="text" placeholder="Search here..." />
+            <!-- Formulaire de recherche -->
+            <form action="search_results.php" method="get">
+                <input class="searchTarget" type="text" name="q" placeholder="Rechercher un film, un artiste, ou un genre..." />
+                <!-- Le bouton est nécessaire pour les soumissions par "Entrer", mais reste invisible -->
+                <button type="submit" style="display: none;"></button>
+            </form>
         </div>
     </nav>
 </header>
@@ -132,7 +140,7 @@ $base_trailer = 'https://www.youtube.com/embed/';
     </div>
 
     <!-- Bouton Étoile pour ajouter aux favoris -->
-    <div class="favorite-section">
+    <div class="favorite-section reveal">
         <?php if ($user_id): ?>
             <form method="post" action="toggle_favorite.php">
                 <input type="hidden" name="movie_id" value="<?php echo $idMovie; ?>">
@@ -141,7 +149,7 @@ $base_trailer = 'https://www.youtube.com/embed/';
                 </button>
             </form>
         <?php else: ?>
-            <p>Connectez-vous pour ajouter ce film à vos favoris.</p>
+            <p class="reveal">Connectez-vous pour ajouter ce film à vos favoris.</p>
         <?php endif; ?>
     </div>
 
@@ -183,9 +191,6 @@ $base_trailer = 'https://www.youtube.com/embed/';
             <ul class="links">
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Compressions</a></li>
-                <li><a href="#">Customers</a></li>
-                <li><a href="#">Service</a></li>
-                <li><a href="#">Collection</a></li>
             </ul>
         </div>
 
@@ -195,10 +200,6 @@ $base_trailer = 'https://www.youtube.com/embed/';
                 <li><a href="#">Free Designs</a></li>
                 <li><a href="#">Latest Designs</a></li>
                 <li><a href="#">Themes</a></li>
-                <li><a href="#">Popular Designs</a></li>
-                <li><a href="#">Art Skills</a></li>
-                <li><a href="#">New Uploads</a></li>
-            </ul>
         </div>
 
         <div class="footer-col">
@@ -207,9 +208,6 @@ $base_trailer = 'https://www.youtube.com/embed/';
                 <li><a href="#">Customer Agreement</a></li>
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">GDPR</a></li>
-                <li><a href="#">Security</a></li>
-                <li><a href="#">Testimonials</a></li>
-                <li><a href="#">Media Kit</a></li>
             </ul>
         </div>
 

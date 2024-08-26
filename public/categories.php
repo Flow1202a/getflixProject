@@ -48,6 +48,8 @@ sort($genres);
     <meta charset="UTF-8">
     <title>Catégories de Films</title>
     <link rel="stylesheet" href="../style/categorieStyle.css">
+    <script src="../javascript/script.js" defer></script>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 </head>
@@ -62,7 +64,6 @@ sort($genres);
             <i class="uil uil-times navCloseBtn"></i>
             <li><a href="index.php">Home</a></li>
             <li><a href="categories.php">Categories</a></li>
-            <li><a href="#">WatchList</a></li>
             <li><a href="../public/account.php">Account</a></li>
             <?php if (isset($_SESSION['role'])): ?>
                 <li><a href="../includes/logout.php">Se déconnecter</a></li>
@@ -80,16 +81,7 @@ sort($genres);
                 <!-- Le bouton est nécessaire pour les soumissions par "Entrer", mais reste invisible -->
                 <button type="submit" style="display: none;"></button>
             </form>
-            <?php foreach ($genres as $genre): ?>
-                <a href="#<?php echo htmlspecialchars($genre); ?>"><?php echo htmlspecialchars($genre); ?></a>
-            <?php endforeach; ?>
         </div>
-    </nav>
-</header>
-
-<header>
-    <nav>
-
     </nav>
 </header>
 
@@ -128,6 +120,5 @@ sort($genres);
         container.scrollBy({ left: 1500, behavior: 'smooth' });
     }
 </script>
-Et dans ton HT
 </body>
 </html>

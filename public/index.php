@@ -28,13 +28,12 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <header>
     <nav class="nav position-fixed w-100">
         <i class="uil uil-bars navOpenBtn"></i>
-            <a href="index.php" class="logo">GetFlixDeNullos</a>
+        <a href="index.php" class="logo">GetFlixDeNullos</a>
 
         <ul class="nav-links align-items-center">
             <i class="uil uil-times navCloseBtn"></i>
             <li><a href="index.php">Home</a></li>
             <li><a href="categories.php">Categories</a></li>
-            <li><a href="#">WatchList</a></li>
             <li><a href="../public/account.php">Account</a></li>
             <?php if (isset($_SESSION['role'])): ?>
                 <li><a href="../includes/logout.php">Se déconnecter</a></li>
@@ -56,6 +55,10 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </nav>
 </header>
 
+
+
+
+
 <!-- Jumbotron -->
 <div class="p-5 justify-content-center text-center bg-image rounded-3 d-flex" style="background-image: url('/'); height: 400px; margin-top: 70px;">
     <div class="mask" style="background-image: url('../images/registerBackGround.jpg');">
@@ -72,22 +75,22 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 <article class="container mb-5">
-    <div class="row flex-wrap d-flex justify-content-between align-content-center">
-
-            <?php for ($i = 0; $i < 100; $i++): ?>
-                <?php if (isset($movies[$i])): ?>
-                    <?php $movie = $movies[$i]; ?>
-                    <div class="card moviecarte col-xs-12 col-sm-6 col-md-3 col-lg-2 mb-5 me-1 text-align-center reveal">
-                        <img src="<?php echo htmlspecialchars($base_image_url . htmlspecialchars($movie['movies_image'])); ?>"   href="" class="card-img-top" alt="<?php echo htmlspecialchars($movie['title']); ?>">
-                        <div class="card-body align-content-center">
-                            <h5 class="card-title" style="color: #EED6D3"><?php echo htmlspecialchars($movie['title']); ?></h5>
-                            <a href="movie.php?id=<?php echo htmlspecialchars($movie['id']); ?>" class="btn boutonDetails btn-primary">Voir les détails</a>
-                        </div>
+    <div class="search-results-container">
+        <?php for ($i = 0; $i < 100; $i++): ?>
+            <?php if (isset($movies[$i])): ?>
+                <?php $movie = $movies[$i]; ?>
+                <div class="search-movie reveal">
+                    <img src="<?php echo htmlspecialchars($base_image_url . htmlspecialchars($movie['movies_image'])); ?>" class="card-img-top reveal" alt="<?php echo htmlspecialchars($movie['title']); ?>">
+                    <div class="card-body">
+                        <a href="movie.php?id=<?php echo htmlspecialchars($movie['id']); ?>" class="card-title reveal"><?php echo htmlspecialchars($movie['title']); ?></a>
                     </div>
-                <?php endif; ?>
-            <?php endfor; ?>
+                </div>
+            <?php endif; ?>
+        <?php endfor; ?>
     </div>
 </article>
+
+<button id="backToTop" title="Retour en haut">⬆️</button>
 
 <section class="footer">
     <div class="footer-row">
@@ -96,9 +99,7 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <ul class="links">
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Compressions</a></li>
-                <li><a href="#">Customers</a></li>
-                <li><a href="#">Service</a></li>
-                <li><a href="#">Collection</a></li>
+
             </ul>
         </div>
 
@@ -108,9 +109,7 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <li><a href="#">Free Designs</a></li>
                 <li><a href="#">Latest Designs</a></li>
                 <li><a href="#">Themes</a></li>
-                <li><a href="#">Popular Designs</a></li>
-                <li><a href="#">Art Skills</a></li>
-                <li><a href="#">New Uploads</a></li>
+
             </ul>
         </div>
 
@@ -120,9 +119,7 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <li><a href="#">Customer Agreement</a></li>
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">GDPR</a></li>
-                <li><a href="#">Security</a></li>
-                <li><a href="#">Testimonials</a></li>
-                <li><a href="#">Media Kit</a></li>
+
             </ul>
         </div>
 
@@ -146,6 +143,7 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 </section>
+<button id="backToTop" title="Retour en haut">⬆️</button>
 <script src="../javascript/script.js" defer></script>
 <script src="../javascript/scriptMovie.js"></script>
 </body>
