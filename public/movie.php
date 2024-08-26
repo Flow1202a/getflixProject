@@ -58,11 +58,11 @@ $base_trailer = 'https://www.youtube.com/embed/';
 
         <ul class="nav-links align-items-center">
             <i class="uil uil-times navCloseBtn"></i>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Categories</a></li>
+            <li><a href="./index.php">Home</a></li>
+            <li><a href="./categories.php">Categories</a></li>
             <li><a href="#">WatchList</a></li>
-            <li><a href="#">Account</a></li>
-            <li><a href="#">Connexion</a></li>
+            <li><a href="./account.php">Account</a></li>
+            <li><a href="./logintest.php">Connexion</a></li>
         </ul>
 
         <i class="uil uil-search search-icon" id="searchIcon"></i>
