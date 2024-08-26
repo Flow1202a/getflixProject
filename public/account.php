@@ -93,19 +93,21 @@ if (isset($_GET['delete'])) {
     <title>Mon compte</title>
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="../style/accountStyle.css">
+    <script src="../javascript/script.js" defer></script>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
 
 <header>
-<nav class="nav position-fixed w-100">
+    <nav class="nav position-fixed w-100">
         <i class="uil uil-bars navOpenBtn"></i>
-            <a href="index.php" class="logo">GetFlixDeNullos</a>
+        <a href="index.php" class="logo">GetFlixDeNullos</a>
 
         <ul class="nav-links align-items-center">
             <i class="uil uil-times navCloseBtn"></i>
             <li><a href="index.php">Home</a></li>
             <li><a href="categories.php">Categories</a></li>
-            <li><a href="#">WatchList</a></li>
             <li><a href="../public/account.php">Account</a></li>
             <?php if (isset($_SESSION['role'])): ?>
                 <li><a href="../includes/logout.php">Se déconnecter</a></li>
@@ -187,7 +189,6 @@ if (isset($_GET['delete'])) {
         </tbody>
     </table>
 </div>
-
-<script src="../javascript/scriptAccoount.js"></script>
+<script src="../javascript/script.js" defer></script>
 </body>
 </html>

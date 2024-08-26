@@ -89,3 +89,145 @@ a:hover {
 span {
     color: #dc3545;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .favorites-slider {
+        gap: 10px; /* Réduit l'écart pour les petits écrans */
+        padding: 10px 10px;
+    }
+
+    .favorite-item {
+        width: 120px; /* Ajuste la taille des éléments pour s'adapter à des écrans plus petits */
+    }
+
+    th, td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    table {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    h1, h2 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .favorites-slider {
+        gap: 8px; /* Réduit encore l'écart pour les très petits écrans */
+        padding: 8px 8px;
+    }
+
+    .favorite-item {
+        width: 100px; /* Encore plus petit pour s'ajuster aux très petits écrans */
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    h1, h2 {
+        font-size: 20px;
+    }
+
+    a {
+        font-size: 12px;
+    }
+}
+
+/* CSS pour le menu déroulant mobile */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0; /* Aligne le menu à droite */
+    width: 300px; /* Ajuste la largeur du menu */
+    height: 100%;
+    background-color: #055d74;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    z-index: 1000; /* Assure que le menu est au-dessus des autres éléments */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centre horizontalement */
+    padding-top: 60px;
+    transform: translateX(100%); /* Cache le menu en le décalant vers la droite */
+}
+
+.mobile-menu.open {
+    transform: translateX(0); /* Affiche le menu */
+}
+
+.mobile-menu .mobile-nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center; /* Centre le texte dans les éléments de liste */
+}
+
+.mobile-menu .mobile-nav-links li {
+    margin: 20px 0;
+}
+
+.mobile-menu .mobile-nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 15px 20px;
+    display: block;
+}
+
+.mobile-menu .mobile-nav-links a:hover {
+    background-color: #1a3e5c;
+}
+
+.mobile-menu .navCloseBtn {
+    position: absolute;
+    top: 20px;
+    left: 20px; /* Positionne la croix à gauche pour une meilleure visibilité */
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Style pour le bouton du menu sur les petits écrans */
+.navOpenBtn {
+    display: none; /* Masqué par défaut */
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Styles pour les écrans petits */
+@media screen and (max-width: 1000px) {
+    .nav {
+        padding: 15px 20px;
+    }
+
+    .nav .nav-links {
+        display: none; /* Masque les liens de navigation sur les petits écrans */
+    }
+
+    .navOpenBtn {
+        display: block; /* Affiche le bouton du menu */
+    }
+
+    .mobile-menu.open {
+        transform: translateX(0); /* Affiche le menu lorsque la classe 'open' est ajoutée */
+    }
+}
