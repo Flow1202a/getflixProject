@@ -5,7 +5,7 @@ require_once('../includes/db_connect.php');
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {
-    header('Location: logintest.php');
+    header('Location: ../public/logintest.php');
     exit;
 }
 
