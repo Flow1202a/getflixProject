@@ -5,7 +5,7 @@ require_once('../includes/db_connect.php');
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {
-    header('Location: ./logintest.php');
+    header('Location: ../public/logintest.php');
     exit;
 }
 
@@ -74,7 +74,7 @@ if (isset($_GET['delete'])) {
             $stmt = $pdo->prepare($delete_query);
             $stmt->execute(['id' => $delete_id]);
 
-            header('Location: back_office.php');
+            header('Location: ../includes/back_office.php');
             exit;
         } else {
             echo "Vous n'avez pas les permissions nécessaires pour supprimer ce message.";
@@ -174,7 +174,7 @@ if (isset($_GET['delete'])) {
                     <td><?php echo htmlspecialchars($message['created_at']); ?></td>
                     <td>
                         <?php if ($user_role == 'admin' || $message['username'] == $_SESSION['username']): ?>
-                            <a href="back_office.php?delete=<?php echo $message['id']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce message ?');">Supprimer</a>
+                            <a href="../includes/back_office.php?delete=<?php echo $message['id']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce message ?');">Supprimer</a>
                         <?php else: ?>
                             <span>Non autorisé</span>
                         <?php endif; ?>
