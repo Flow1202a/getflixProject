@@ -150,7 +150,22 @@ a {
 }
 .card{
   --bs-card-bg: rgb(23, 23, 23) !important;
+  height: 300px;
+  max-width: 200px;
+}
 
+.card-img-top {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.results-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+  margin-top: 100px;
 }
 .card-body{
   text-align: center;
@@ -161,6 +176,23 @@ a {
 .card{
   box-shadow: rgba(0, 0, 0, 0.25) 0 54px 55px, rgba(0, 0, 0, 0.12) 0 -12px 30px, rgba(0, 0, 0, 0.12) 0 4px 6px, rgba(0, 0, 0, 0.17) 0 12px 13px, rgba(0, 0, 0, 0.09) 0 -3px 5px;
 }
+.card-title {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  max-width: 100%;
+  background-color: #2e8bc0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
 @media screen and (max-width: 1000px) {
   .nav .navOpenBtn,
   .nav .navCloseBtn {
@@ -406,12 +438,7 @@ article{
   border-radius: 10px;
 }
 
-.results-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 20px;
-}
+
 
 
 
