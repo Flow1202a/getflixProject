@@ -272,6 +272,7 @@ h2 {
     padding: 20px;
     scroll-behavior: smooth;
     gap: 15px; /* Ajout d'un espacement entre les éléments */
+    justify-content: center;
 }
 
 .movie {
