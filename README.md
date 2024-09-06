@@ -20,7 +20,8 @@
 ## Preview
 
 >Here is the presentation page of the different categories
-<img src="https://i.ibb.co/vH48dJ6/image.png">
+![Category](https://i.ibb.co/vH48dJ6/image.png)
+
 
 >Thanks for reading.   
 >Loutfi, Gem and Florian    
