@@ -61,7 +61,7 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!-- Jumbotron -->
 <div class="p-5 justify-content-center text-center bg-image rounded-3 d-flex" style="background-image: url('/'); height: 400px; margin-top: 70px;">
-    <div class="mask" style="background-image: url('../images/registerBackGround.jpg');">
+    <div class="mask" style="background-image: url('../images/registerBackGround.webp');">
         <div class="d-flex justify-content-center align-items-center h-100">
             <div class="text-white">
                 <h1 class="mb-3">Découvrez les 100 films les mieux notés</h1>

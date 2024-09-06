@@ -140,7 +140,7 @@ $base_trailer = 'https://www.youtube.com/embed/';
     </div>
 
     <!-- Bouton Étoile pour ajouter aux favoris -->
-    <div class="favorite-section reveal">
+    <div class="favorite-section">
         <?php if ($user_id): ?>
             <form method="post" action="toggle_favorite.php">
                 <input type="hidden" name="movie_id" value="<?php echo $idMovie; ?>">
@@ -149,7 +149,7 @@ $base_trailer = 'https://www.youtube.com/embed/';
                 </button>
             </form>
         <?php else: ?>
-            <p class="reveal">Connectez-vous pour ajouter ce film à vos favoris.</p>
+            <p>Connectez-vous pour ajouter ce film à vos favoris.</p>
         <?php endif; ?>
     </div>
 
@@ -191,6 +191,9 @@ $base_trailer = 'https://www.youtube.com/embed/';
             <ul class="links">
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Compressions</a></li>
+                <li><a href="#">Customers</a></li>
+                <li><a href="#">Service</a></li>
+                <li><a href="#">Collection</a></li>
             </ul>
         </div>
 
@@ -200,6 +203,10 @@ $base_trailer = 'https://www.youtube.com/embed/';
                 <li><a href="#">Free Designs</a></li>
                 <li><a href="#">Latest Designs</a></li>
                 <li><a href="#">Themes</a></li>
+                <li><a href="#">Popular Designs</a></li>
+                <li><a href="#">Art Skills</a></li>
+                <li><a href="#">New Uploads</a></li>
+            </ul>
         </div>
 
         <div class="footer-col">
@@ -208,6 +215,9 @@ $base_trailer = 'https://www.youtube.com/embed/';
                 <li><a href="#">Customer Agreement</a></li>
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">GDPR</a></li>
+                <li><a href="#">Security</a></li>
+                <li><a href="#">Testimonials</a></li>
+                <li><a href="#">Media Kit</a></li>
             </ul>
         </div>
 
