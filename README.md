@@ -19,10 +19,13 @@
 
 ## Preview
 
+>Here is the login page with verifications 2FA mail verification :)
+![login_page](https://github.com/user-attachments/assets/667d1099-3660-4298-9ca2-2d93fe28b6b0)
+
 >Here is the presentation page of the different categories
 ![category_preview](https://github.com/user-attachments/assets/4bd190c3-cc2e-4bc5-bc09-bc6ac364155c)
 
-
+Enjoy :D
 
 
 
