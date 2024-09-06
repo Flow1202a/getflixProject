@@ -13,7 +13,7 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url("../images/registerBackGround.jpg") center;
+    background: url("../images/registerBackGround.webp") center;
 }
 
 .wrapper{
@@ -128,7 +128,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url("../images/registerBackGround.jpg") center;
+    background: url("../images/registerBackGround.webp") center;
     background-size: cover;
 }
 
