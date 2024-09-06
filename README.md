@@ -20,8 +20,9 @@
 ## Preview
 
 >Here is the presentation page of the different categories
-![Category](https://i.ibb.co/vH48dJ6/image.png)
->![6a078765612b2daddd731b9e5bd60c49](https://github.com/user-attachments/assets/178808b9-fc41-4943-b68d-ef2a590ac265)
+![category_preview](https://github.com/user-attachments/assets/4bd190c3-cc2e-4bc5-bc09-bc6ac364155c)
+
+
 
 
 
