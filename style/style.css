@@ -4,7 +4,7 @@
 body{
   background: rgb(12,45,72);
   background: linear-gradient(270deg, rgba(12,45,72,1) 0%, rgba(20,93,160,1) 50%, rgba(12,45,72,1) 100%);
-  font-family: "Poppins Medium", serif ;
+  font-family: "Poppins", serif ;
 }
 
 header {
